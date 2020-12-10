@@ -15,9 +15,7 @@ def loo_muster():
     kast_pildi_kõrgus = kast_pildi_kõrgus.get()
     kast_pildi_laius = kast_pildi_laius.get()
     kast_faili_nimi = kast_faili_nimi.get()
-    print(kast_pildi_kõrgus)
-    print(pilt)
-    
+    pilt = valitud_nimi
     if valitud_tüüp == '.svg':
         l.svg_fail(pilt, laius, kõrgus, kast_faili_nimi)
     else:
@@ -81,8 +79,9 @@ def näidise_valik(*args):
     global nupp_edasi
     global nupp_tagasi
     global valik
-    
+    global valitud_nimi
     valitud_nimi = valik.get()
+    print(valitud_nimi)
     for i in range(len(valikud)):
         if valikud[i] == valitud_nimi:
             pildi_nr = i
