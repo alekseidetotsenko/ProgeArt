@@ -12,14 +12,19 @@ def loo_muster():
     global kast_pildi_kõrgus
     global kast_faili_nimi
     global valitud_nimi
-    kast_pildi_kõrgus = int(kast_pildi_kõrgus.get())
-    kast_pildi_laius = int(kast_pildi_laius.get())
+    kast_pildi_kõrgus = kast_pildi_kõrgus.get()
+    print(kast_pildi_kõrgus)
+    kast_pildi_laius = kast_pildi_laius.get()
+    print(kast_pildi_laius)
     kast_faili_nimi = kast_faili_nimi.get()
     pilt = valitud_nimi
+    print(valitud_nimi)
+    print(valitud_tüüp.get())
+    print(kast_faili_nimi)
     if valitud_tüüp.get() == 0:
-        l.svg_fail(pilt, kast_pildi_laius, kast_pildi_kõrgus, kast_faili_nimi)
+        l.svg_fail(pilt, int(kast_pildi_laius), int(kast_pildi_kõrgus), kast_faili_nimi)
     else:
-        l.png_fail(pilt, kast_pildi_laius, kast_pildi_kõrgus, kast_faili_nimi)
+        l.png_fail(pilt, int(kast_pildi_laius), int(kast_pildi_kõrgus), kast_faili_nimi)
 
 
 
