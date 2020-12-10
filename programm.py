@@ -12,11 +12,12 @@ def loo_muster():
     global kast_pildi_kõrgus
     global kast_faili_nimi
     global pilt
+    print(pilt)
     
     if valitud_tüüp == '.svg':
-        l.svg_fail(pilt, int(kast_pildi_laius), int(kast_pildi_kõrgus), kast_faili_nimi)
+        l.svg_fail(pilt, laius, kõrgus, kast_faili_nimi)
     else:
-        l.png_fail(pilt, int(kast_pildi_laius), int(kast_pildi_kõrgus), kast_faili_nimi)
+        l.png_fail(pilt, laius, kõrgus, kast_faili_nimi)
 
 
 
