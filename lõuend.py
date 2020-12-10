@@ -3,7 +3,7 @@ from kunst import *
 import cairo
 from inspect import getmembers, isfunction # nende abil saab kujunduste faili funktsioonidest listi teha
 
-def lõuend(c, mustri_nr, laius, kõrgus):
+def lõuend(cr, mustri_nr, laius, kõrgus):
     cr.set_source_rgba(0, 0, 0, 0)
     cr.rectangle(0, 0, laius, kõrgus)
     cr.fill()
