@@ -11,12 +11,12 @@ def loo_muster():
     global kast_pildi_laius
     global kast_pildi_kõrgus
     global kast_faili_nimi
-    global pilt
+    global valitud_nimi
     kast_pildi_kõrgus = int(kast_pildi_kõrgus.get())
     kast_pildi_laius = int(kast_pildi_laius.get())
     kast_faili_nimi = kast_faili_nimi.get()
     pilt = valitud_nimi
-    if valitud_tüüp == '.svg':
+    if valitud_tüüp.get() == 0:
         l.svg_fail(pilt, kast_pildi_laius, kast_pildi_kõrgus, kast_faili_nimi)
     else:
         l.png_fail(pilt, kast_pildi_laius, kast_pildi_kõrgus, kast_faili_nimi)
@@ -81,7 +81,6 @@ def näidise_valik(*args):
     global valik
     global valitud_nimi
     valitud_nimi = valik.get()
-    print(valitud_nimi)
     for i in range(len(valikud)):
         if valikud[i] == valitud_nimi:
             pildi_nr = i
@@ -202,9 +201,9 @@ silt_faili_tüüp = Label(raam, text = 'Tüüp:', bg = tausta_värv, fg = teksti
 silt_faili_tüüp.grid(row = tüübi_sildi_rida, column = tüübi_sildi_veerg, sticky = W)
 
 valitud_tüüp = IntVar()
-nupp_png = Radiobutton(raam, text = '.png', value = '.png', variable = valitud_tüüp, bg = tausta_värv, fg = teksti_värv) # siia on kuidagi vaja lisada see: lambda: png_fail(c, laius, kõrgus)
+nupp_png = Radiobutton(raam, text = '.png', value = 1, variable = valitud_tüüp, bg = tausta_värv, fg = teksti_värv) # siia on kuidagi vaja lisada see: lambda: png_fail(c, laius, kõrgus)
 nupp_png.grid(row = png_nupu_rida, column = png_nupu_veerg)
-nupp_svg = Radiobutton(raam, text = '.svg', value = '.svg', variable = valitud_tüüp, bg = tausta_värv, fg = teksti_värv) # ja siia see: lambda: svg_fail(c, laius, kõrgus)
+nupp_svg = Radiobutton(raam, text = ".svg", value = 0, variable = valitud_tüüp, bg = tausta_värv, fg = teksti_värv) # ja siia see: lambda: svg_fail(c, laius, kõrgus)
 nupp_svg.grid(row = svg_nupu_rida, column = svg_nupu_veerg)
 
 # faili nime sisestamise osa

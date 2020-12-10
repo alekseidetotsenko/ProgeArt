@@ -8,7 +8,7 @@ def lõuend(cr, mustri_nr, laius, kõrgus):
     cr.rectangle(0, 0, laius, kõrgus)
     cr.fill()
     
-    eval(pilt)(c, laius, kõrgus) # valib funktsiooni ja annab sellele vajalikud argumendid
+    eval(mustri_nr)(cr, laius, kõrgus) # valib funktsiooni ja annab sellele vajalikud argumendid
     
 # funktsioonid svg ja png loomiseks
 def svg_fail(mustri_nr, laius, kõrgus, faili_nimi):
