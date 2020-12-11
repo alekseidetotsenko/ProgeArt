@@ -7,7 +7,7 @@ list_of_colors = [(145, 185, 141), (229, 192, 121), (210, 191, 88), (140, 190, 1
  (41, 241, 195), (243, 156, 18), (189, 195, 199), (101, 198, 187), (255, 246, 143), (243, 241, 239)]
 
 
-WIDTH = 2000
+WIDTH = 6000
 HEIGHT = 3000 
 surface = cairo.ImageSurface(cairo.FORMAT_RGB24, WIDTH, HEIGHT)
 
@@ -163,18 +163,18 @@ def joonedkeskelt(ctx,WIDTH,HEIGHT):
         ctx.stroke()
 
 def ringid_valged(ctx,WIDTH,HEIGHT):
-    for i in range(int(20* x_telje_suhe/y_telje_suhe)):
-        r = int(10* x_telje_suhe/y_telje_suhe)
+    for i in range(int(20* x_telje_suhe)):
+        r = int(10* x_telje_suhe)
         x = random.randint(1,int(3*1980* x_telje_suhe))
-        y = random.randint(1,int(3*1980* y_telje_suhe))
-        for i in range(int(100* x_telje_suhe/y_telje_suhe)):
+        y = random.randint(1,int(3*1020* y_telje_suhe))
+        for l in range(int(100* x_telje_suhe/y_telje_suhe)):
             ctx.set_source_rgb(1, 1, 1)
             ctx.arc(x, y, r, 0, 2*math.pi)
             ctx.set_line_width(2)
             ctx.stroke()
             r += int(6* x_telje_suhe/y_telje_suhe)
-            x += random.randint(int(-50* x_telje_suhe),int(50* x_telje_suhe))
-            y += random.randint(int(-50* y_telje_suhe),int(50* y_telje_suhe))
+            x += random.randint(int(-50* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe))
+            y += random.randint(int(-50* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe))
             
 def ringid_värvilised(ctx,WIDTH,HEIGHT):
     for i in range(int(20* x_telje_suhe/y_telje_suhe)):
@@ -414,6 +414,6 @@ def midagit6(ctx,WIDTH,HEIGHT):
             ctx.restore()
             ctx.stroke()
             
-ringid_valged(ctx, WIDTH, HEIGHT)
+ringid_värvilised(ctx, WIDTH, HEIGHT)
 
 surface.write_to_png('xxx.png')
