@@ -24,4 +24,4 @@ def png_fail(mustri_nr, laius, kõrgus, faili_nimi):
     c = cairo.Context(pilt)
     lõuend(c, mustri_nr, laius, kõrgus)
     
-    pilt.write_to_png(faili_nimi + '.png')
+    pilt.write_to_png('Valminud kunstiteosed/' +faili_nimi + '.png')
