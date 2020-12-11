@@ -10,13 +10,13 @@ import lõuend as l# siin on programmi kunsti pool
 def loo_muster():
     kõrgus = kast_pildi_kõrgus.get()
     laius = kast_pildi_laius.get()
-    nimi = kast_faili_nimi.get()
-    pilt = valitud_nimi
+    failinimi = kast_faili_nimi.get()
+    kunstityyp = valitud_nimi
     
     if valitud_tüüp.get() == 0:
-        l.svg_fail(pilt, int(laius), int(kõrgus), nimi)
+        l.svg_fail(kunstityyp, int(laius), int(kõrgus), failinimi)
     else:
-        l.png_fail(pilt, int(laius), int(kõrgus), nimi)
+        l.png_fail(kunstityyp, int(laius), int(kõrgus), failinimi)
 
 
 
