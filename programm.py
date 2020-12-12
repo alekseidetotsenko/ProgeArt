@@ -198,9 +198,9 @@ silt_faili_tüüp = Label(raam, text = 'Tüüp:', bg = tausta_värv, fg = teksti
 silt_faili_tüüp.grid(row = tüübi_sildi_rida, column = tüübi_sildi_veerg, sticky = W)
 
 valitud_tüüp = IntVar()
-nupp_png = Radiobutton(raam, text = '.png', value = 0, variable = valitud_tüüp, bg = tausta_värv, activebackground = nupu_taust_vajutades) # siia on kuidagi vaja lisada see: lambda: png_fail(c, laius, kõrgus)
+nupp_png = Radiobutton(raam, text = '.png', value = 0, variable = valitud_tüüp, bg = tausta_värv, activebackground = nupu_taust_vajutades, fg = '#30AA30') # siia on kuidagi vaja lisada see: lambda: png_fail(c, laius, kõrgus)
 nupp_png.grid(row = png_nupu_rida, column = png_nupu_veerg)
-nupp_svg = Radiobutton(raam, text = ".svg", value = 1, variable = valitud_tüüp, bg = tausta_värv, activebackground = nupu_taust_vajutades) # ja siia see: lambda: svg_fail(c, laius, kõrgus)
+nupp_svg = Radiobutton(raam, text = ".svg", value = 1, variable = valitud_tüüp, bg = tausta_värv, activebackground = nupu_taust_vajutades, fg = '#30AA30') # ja siia see: lambda: svg_fail(c, laius, kõrgus)
 nupp_svg.grid(row = svg_nupu_rida, column = svg_nupu_veerg)
 
 # faili nime sisestamise osa
