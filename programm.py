@@ -174,8 +174,9 @@ pildi_loendur.grid(row = loenduri_rida, column = loenduri_veerg, columnspan = lo
 valikud = []
 for nimi in näidiste_nimed:
     valikud.append(nimi[:-4]) #võtab järelt ära faili laiendi. tulemus on näidise nimeks
+valitud_nimi = valikud[0]
 valik = StringVar()
-valik.set(valikud[0])
+valik.set(valitud_nimi)
 
 menüü = OptionMenu(raam, valik, *valikud)
 menüü.config(bg = tausta_värv, fg = teksti_värv, bd = 0, activebackground = nupu_tausta_värv, activeforeground = teksti_värv, highlightthickness = 0)

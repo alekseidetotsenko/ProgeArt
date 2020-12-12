@@ -1,5 +1,5 @@
 from opensimplex import OpenSimplex
-import cairo, random, math
+import cairo, random, math, copy
 
 def kõverik(cr, laius, kõrgus):
     joon = 2
