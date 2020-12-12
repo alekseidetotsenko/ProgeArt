@@ -212,17 +212,20 @@ silt_faili_nimi = Label(raam, text = 'Nimi:', bg = tausta_värv, fg = teksti_vä
 silt_faili_nimi.grid(row = nime_sildi_rida, column = nime_sildi_veerg, sticky = W)
 kast_faili_nimi = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_faili_nimi.grid(row = nime_kasti_rida, column = nime_kasti_veerg, columnspan = nime_kasti_ulatus, sticky = W)
+kast_faili_nimi.insert(0,'minu_fail_1')
 
 # laiuse ja kõrguse sisestamise osa
 silt_pildi_laius = Label(raam, text = 'Laius:', bg = tausta_värv, fg = teksti_värv)
 silt_pildi_laius.grid(row = laiuse_sildi_rida, column = laiuse_sildi_veerg, sticky = W)
 kast_pildi_laius = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_pildi_laius.grid(row = laiuse_kasti_rida, column = laiuse_kasti_veerg, sticky = W)
+kast_pildi_laius.insert(0,'5940')
 
 silt_pildi_kõrgus = Label(raam, text = 'Kõrgus:', bg = tausta_värv, fg = teksti_värv)
 silt_pildi_kõrgus.grid(row = kõrguse_sildi_rida, column = kõrguse_sildi_veerg, sticky = W)
 kast_pildi_kõrgus = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_pildi_kõrgus.grid(row = kõrguse_kasti_rida, column = kõrguse_kasti_veerg, sticky = W)
+kast_pildi_kõrgus.insert(0,'3060')
 
 
 raam.mainloop()
