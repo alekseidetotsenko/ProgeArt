@@ -6,7 +6,7 @@ import lõuend as l# siin on programmi kunsti pool
 
 
 
-# generate funktsioon tuleb siia.
+# funktsiooni sisse lugemine näidise nime põhjal ja käivitamine
 def loo_muster():
     kõrgus = kast_pildi_kõrgus.get()
     laius = kast_pildi_laius.get()
@@ -20,7 +20,7 @@ def loo_muster():
 
 
 
-# edasi liikumise nupu funktsioon
+# funktsioonid edasi ja tagasi nupu jaoks
 def edasi(pildi_nr):
     global pilt
     global nupp_edasi
@@ -29,7 +29,7 @@ def edasi(pildi_nr):
         
     # eelmine näidis eest ära ja uus asemele
     pilt.grid_forget()
-    pilt = Label(image = näidised[pildi_nr], bg = pildi_akna_värv)
+    pilt = Label(image = näidised[pildi_nr], bg = pildi_akna_värv, bd = 0)
     pilt.grid(row = pildi_akna_rida, column = pildi_akna_veerg, columnspan = pildi_akna_ulatus)
     
     # dropdown menüü valiku uuendus
@@ -45,7 +45,6 @@ def edasi(pildi_nr):
     nupp_tagasi = Button(raam, text = "<<", command = lambda: tagasi(t(pildi_nr)), bg = nupu_tausta_värv, fg = teksti_värv, bd = 0, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
     nupp_tagasi.grid(row = tagasi_nupu_rida, column = tagasi_nupu_veerg, sticky = W)
 
-# tagasi liikumise nupu funktsioon
 def tagasi(pildi_nr):
     global pilt
     global nupp_edasi
@@ -54,7 +53,7 @@ def tagasi(pildi_nr):
     
     # eelmine näidis eest ära ja uus asemele
     pilt.grid_forget()
-    pilt = Label(image = näidised[pildi_nr], bg = pildi_akna_värv)
+    pilt = Label(image = näidised[pildi_nr], bg = pildi_akna_värv, bd = 0)
     pilt.grid(row = pildi_akna_rida, column = pildi_akna_veerg, columnspan = pildi_akna_ulatus)
     
     # dropdown menüü valiku uuendus
@@ -70,7 +69,8 @@ def tagasi(pildi_nr):
     nupp_tagasi = Button(raam, text = "<<", command = lambda: tagasi(t(pildi_nr)), bg = nupu_tausta_värv, fg = teksti_värv, bd = 0, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
     nupp_tagasi.grid(row = tagasi_nupu_rida, column = tagasi_nupu_veerg, sticky = W)
     
-# menüü valiku funktsioon
+
+# valikmenüü funktsioon
 def näidise_valik(*args):
     global pilt
     global nupp_edasi
@@ -81,7 +81,7 @@ def näidise_valik(*args):
     for i in range(len(valikud)):
         if valikud[i] == valitud_nimi:
             pildi_nr = i
-            pilt = Label(image = näidised[pildi_nr], bg = pildi_akna_värv)
+            pilt = Label(image = näidised[pildi_nr], bg = pildi_akna_värv, bd = 0)
             pilt.grid(row = pildi_akna_rida, column = pildi_akna_veerg, columnspan = pildi_akna_ulatus)
     
     # nuppude uuendus
@@ -96,7 +96,9 @@ def näidise_valik(*args):
     
     # dropdown menüü valiku uuendus
     valik.set(valikud[pildi_nr])
-    
+
+
+# raam
 raam = Tk()
 raam.title("ArtProjekt")
 tausta_värv = '#404040'
@@ -104,18 +106,20 @@ raam.configure(bg = tausta_värv)
 ikoon = PhotoImage(file = 'ikoon.png')
 raam.iconphoto(False, ikoon)
 
+
 # vidinate asukohad, värvid
-teksti_värv = '#F0F0F0'
-nupu_tausta_värv = '#606060'
-nupu_taust_vajutades = '#C88C8C'
-mustri_nupu_taust = '#30AA30'
-mustri_nupp_vajutades = '#40BB40'
+teksti_värv = '#FFFFFF'
+nupu_tausta_värv = '#404040'
+nupu_taust_vajutades = '#606060'
+mustri_nupu_taust = '#B47575'
+mustri_nupp_vajutades = '#B47575'
 mustri_nupu_tekst = teksti_värv
-pildi_akna_värv = '#000000'
-kasti_tausta_värv = nupu_tausta_värv
+pildi_akna_värv = tausta_värv
+kasti_tausta_värv = nupu_taust_vajutades
 
 nime_sildi_rida, nime_sildi_veerg = 0, 0
-nime_kasti_rida, nime_kasti_veerg, nime_kasti_ulatus = 0, 1, 4
+nime_kasti_rida, nime_kasti_veerg, nime_kasti_ulatus = 0, 1, 1
+mustri_nupu_rida, mustri_nupu_veerg, mustri_nupu_ulatus = 0, 2, 2
 
 laiuse_sildi_rida, laiuse_sildi_veerg = 1, 0
 laiuse_kasti_rida, laiuse_kasti_veerg = 1, 1
@@ -127,15 +131,14 @@ tüübi_sildi_rida, tüübi_sildi_veerg = 3, 0
 svg_nupu_rida, svg_nupu_veerg = 3, 1
 png_nupu_rida, png_nupu_veerg = 3, 2
 
-pildi_akna_rida, pildi_akna_veerg, pildi_akna_ulatus = 4, 0, 4
+tagasi_nupu_rida, tagasi_nupu_veerg = 4, 0
+edasi_nupu_rida, edasi_nupu_veerg = 4, 3
+menüü_rida, menüü_veerg, menüü_ulatus = 4, 1, 2
 
-tagasi_nupu_rida, tagasi_nupu_veerg = 5, 0
-edasi_nupu_rida, edasi_nupu_veerg = 5, 3
-menüü_rida, menüü_veerg, menüü_ulatus = 5, 1, 2
+pildi_akna_rida, pildi_akna_veerg, pildi_akna_ulatus = 5, 0, 4
 
-mustri_nupu_rida, mustri_nupu_veerg, mustri_nupu_ulatus = 6, 0, 4
+loenduri_rida, loenduri_veerg, loenduri_ulatus = 6, 0, 4
 
-loenduri_rida, loenduri_veerg, loenduri_ulatus = 7, 0, 4
 
 # loen näidised sisse
 näidised = []
@@ -163,7 +166,7 @@ def t(arv, alumine = 0, ülemine = piir): # tagasi liikumiseks
         return arv - 1
 
 # näidise kuvamine
-pilt = Label(image = näidised[0], bg = pildi_akna_värv)
+pilt = Label(image = näidised[0], bg = pildi_akna_värv, bd = 0)
 pilt.grid(row = pildi_akna_rida, column = pildi_akna_veerg, columnspan = pildi_akna_ulatus)
 
 # näidiste loendur
@@ -179,46 +182,46 @@ valik = StringVar()
 valik.set(valitud_nimi)
 
 menüü = OptionMenu(raam, valik, *valikud)
-menüü.config(bg = tausta_värv, fg = teksti_värv, bd = 0, activebackground = nupu_tausta_värv, activeforeground = teksti_värv, highlightthickness = 0)
-menüü.grid(row = menüü_rida, column = menüü_veerg, columnspan = menüü_ulatus, sticky = W + E)
+menüü.config(bg = tausta_värv, fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv, highlightthickness = 0)
+menüü.grid(row = menüü_rida, column = menüü_veerg, columnspan = menüü_ulatus)
 
 # annab funktsioonile näidise_valik argumendi
 valik.trace('w', näidise_valik)
 
 # nupud ja lahtrid Aleksei koodist. Tegin ainult eestikeelseks ja panin asukoha parameetrid muutujatena.
 # nupud
-nupp_edasi = Button(raam, text = ">>", command = lambda: edasi(1), bg = nupu_tausta_värv, fg = teksti_värv, bd = 0, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
+nupp_edasi = Button(raam, text = ">>", command = lambda: edasi(1), bg = nupu_tausta_värv, fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
 nupp_edasi.grid(row = edasi_nupu_rida, column = edasi_nupu_veerg, sticky = E)
-nupp_tagasi = Button(raam, text = "<<", command = lambda: tagasi(piir), bg = nupu_tausta_värv, fg = teksti_värv, bd = 0, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
+nupp_tagasi = Button(raam, text = "<<", command = lambda: tagasi(piir), bg = nupu_tausta_värv, fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
 nupp_tagasi.grid(row = tagasi_nupu_rida, column = tagasi_nupu_veerg, sticky = W)
-nupp_loo_muster = Button(raam, text='Loo muster', command = loo_muster, fg = mustri_nupu_tekst, bg = mustri_nupu_taust, bd = 0, activebackground = mustri_nupp_vajutades, activeforeground = mustri_nupu_tekst)
-nupp_loo_muster.grid(row = mustri_nupu_rida, column = mustri_nupu_veerg, columnspan = mustri_nupu_ulatus, sticky = W + E)
+nupp_loo_muster = Button(raam, text='Loo muster', command = loo_muster, fg = mustri_nupu_tekst, bg = mustri_nupu_taust, pady = 5, bd = 1, activebackground = mustri_nupp_vajutades, activeforeground = mustri_nupu_tekst)
+nupp_loo_muster.grid(row = mustri_nupu_rida, rowspan = 3, column = mustri_nupu_veerg, columnspan = mustri_nupu_ulatus, sticky = W + E + N + S)
 
-# svg ja png valiku nupud. NEED ON VAJA VEEL KORDA TEHA
-silt_faili_tüüp = Label(raam, text = 'Tüüp:', bg = tausta_värv, fg = teksti_värv)
+# svg ja png valiku nupud
+silt_faili_tüüp = Label(raam, text = 'Fail:', bg = tausta_värv, fg = teksti_värv)
 silt_faili_tüüp.grid(row = tüübi_sildi_rida, column = tüübi_sildi_veerg, sticky = W)
 
 valitud_tüüp = IntVar()
-nupp_png = Radiobutton(raam, text = '.png', value = 0, variable = valitud_tüüp, bg = tausta_värv, activebackground = nupu_taust_vajutades, fg = '#30AA30') # siia on kuidagi vaja lisada see: lambda: png_fail(c, laius, kõrgus)
+nupp_png = Radiobutton(raam, text = '.png', value = 0, variable = valitud_tüüp, selectcolor = tausta_värv, highlightbackground = tausta_värv, activebackground = tausta_värv, activeforeground = teksti_värv, fg = teksti_värv, bg = tausta_värv)
 nupp_png.grid(row = png_nupu_rida, column = png_nupu_veerg)
-nupp_svg = Radiobutton(raam, text = ".svg", value = 1, variable = valitud_tüüp, bg = tausta_värv, activebackground = nupu_taust_vajutades, fg = '#30AA30') # ja siia see: lambda: svg_fail(c, laius, kõrgus)
+nupp_svg = Radiobutton(raam, text = ".svg", value = 1, variable = valitud_tüüp, selectcolor = tausta_värv, highlightbackground = tausta_värv, activebackground = tausta_värv, activeforeground = teksti_värv, fg = teksti_värv, bg = tausta_värv)
 nupp_svg.grid(row = svg_nupu_rida, column = svg_nupu_veerg)
 
 # faili nime sisestamise osa
 silt_faili_nimi = Label(raam, text = 'Nimi:', bg = tausta_värv, fg = teksti_värv)
 silt_faili_nimi.grid(row = nime_sildi_rida, column = nime_sildi_veerg, sticky = W)
-kast_faili_nimi = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv, bd = 0)
+kast_faili_nimi = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_faili_nimi.grid(row = nime_kasti_rida, column = nime_kasti_veerg, columnspan = nime_kasti_ulatus, sticky = W)
 
 # laiuse ja kõrguse sisestamise osa
 silt_pildi_laius = Label(raam, text = 'Laius:', bg = tausta_värv, fg = teksti_värv)
 silt_pildi_laius.grid(row = laiuse_sildi_rida, column = laiuse_sildi_veerg, sticky = W)
-kast_pildi_laius = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv, bd = 0)
+kast_pildi_laius = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_pildi_laius.grid(row = laiuse_kasti_rida, column = laiuse_kasti_veerg, sticky = W)
 
 silt_pildi_kõrgus = Label(raam, text = 'Kõrgus:', bg = tausta_värv, fg = teksti_värv)
 silt_pildi_kõrgus.grid(row = kõrguse_sildi_rida, column = kõrguse_sildi_veerg, sticky = W)
-kast_pildi_kõrgus = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv, bd = 0)
+kast_pildi_kõrgus = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_pildi_kõrgus.grid(row = kõrguse_kasti_rida, column = kõrguse_kasti_veerg, sticky = W)
 
 
