@@ -111,8 +111,8 @@ raam.iconphoto(False, ikoon)
 teksti_värv = '#FFFFFF'
 nupu_tausta_värv = '#404040'
 nupu_taust_vajutades = '#606060'
-mustri_nupu_taust = '#B47575'
-mustri_nupp_vajutades = '#B47575'
+mustri_nupu_taust = '#20B2AA'
+mustri_nupp_vajutades = '#20B2AA'
 mustri_nupu_tekst = teksti_värv
 pildi_akna_värv = tausta_värv
 kasti_tausta_värv = nupu_taust_vajutades
@@ -194,8 +194,8 @@ nupp_edasi = Button(raam, text = ">>", command = lambda: edasi(1), bg = nupu_tau
 nupp_edasi.grid(row = edasi_nupu_rida, column = edasi_nupu_veerg, sticky = E)
 nupp_tagasi = Button(raam, text = "<<", command = lambda: tagasi(piir), bg = nupu_tausta_värv, fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
 nupp_tagasi.grid(row = tagasi_nupu_rida, column = tagasi_nupu_veerg, sticky = W)
-nupp_loo_muster = Button(raam, text='Loo muster', command = loo_muster, fg = mustri_nupu_tekst, bg = mustri_nupu_taust, pady = 5, bd = 1, activebackground = mustri_nupp_vajutades, activeforeground = mustri_nupu_tekst)
-nupp_loo_muster.grid(row = mustri_nupu_rida, rowspan = 3, column = mustri_nupu_veerg, columnspan = mustri_nupu_ulatus, sticky = W + E + N + S)
+nupp_loo_muster = Button(raam, text='Loo disain', font = 'Helvetica 10 bold', command = loo_muster, fg = mustri_nupu_tekst, bg = mustri_nupu_taust, pady = 5, bd = 1, activebackground = mustri_nupp_vajutades, activeforeground = mustri_nupu_tekst)
+nupp_loo_muster.grid(row = mustri_nupu_rida, rowspan = 1, column = mustri_nupu_veerg, columnspan = mustri_nupu_ulatus, sticky = W + E + N + S)
 
 # svg ja png valiku nupud
 silt_faili_tüüp = Label(raam, text = 'Fail:', bg = tausta_värv, fg = teksti_värv)

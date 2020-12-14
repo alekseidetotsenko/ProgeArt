@@ -325,8 +325,7 @@ def võrknurkne(c, laius, kõrgus):
 def jooneline(c, laius, kõrgus):
     
     # põhifunktsioon. abifunktsioone ei ole sellel
-    # algab tausta värvi juhusliku valikuga. seda võiks saada ise valida
-    c.set_source_rgba(1, 1, 1, 1) # valge taustaga. siit saab ka läbipaistvaks teha. viimane 1 tuleb teha 0-ks.
+    c.set_source_rgba(1, 1, 1, 1) # valge taustaga
     c.paint()
     for i in range(2000):
         algus_x = random.randint(-100, laius + 100) # üle ääre
