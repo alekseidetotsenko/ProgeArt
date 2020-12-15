@@ -489,7 +489,8 @@ def paberlennukid(c, laius, kõrgus):
 
 def võõp(c, laius, kõrgus):
     # põhifunktsioon
-    for i in range(laius*30): # pind kaetakse väga paljude juhuslikult paigutatud läbipaistvate ristkülikutega
+    tsükli_pikkus = laius*30//int(laius*0.002)
+    for i in range(tsükli_pikkus): # pind kaetakse väga paljude juhuslikult paigutatud läbipaistvate ristkülikutega
         värv = random.uniform(0.5, 0.8) # et G ja B väärtused tuleksid samad - värv: rohekas sinine
         c.set_source_rgba(0.3, värv, värv, 0.05)
         x = random.randint(laius//kõrgus, laius - laius//45) # kõik väärtused sõltuvad laiusest ja kõrgusest
