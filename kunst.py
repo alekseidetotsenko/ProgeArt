@@ -281,9 +281,10 @@ def siksakiline(c, laius, kõrgus):
         c.set_source_rgba(fikseeritud_värv, fikseeritud_värv, fikseeritud_värv, random.uniform(0.1, 0.5))
         c.fill()
     
-def tupsud(c, laius, kõrgus):    
+
+def tupsud(c, laius, kõrgus):
     # abifunktsioonid
-    def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius): # loob hulknurga punktid
+    def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius): # moodustab hulknurga
         θ = (2*math.pi)/nurgad
         x = keskpunkt_x
         y = keskpunkt_y
@@ -294,31 +295,45 @@ def tupsud(c, laius, kõrgus):
             kujund.append((nurga_x, nurga_y))
         return kujund
 
-    def deform(kujund, muut): # lisab iga punkti vahele juhuslikult uue punkti
-        for i in range(len(kujund)-1, 0, -2):
+    def deform(kujund, muut): # deformeerib hulknurka, lisades iga nurga vahele uue nurga suvaliselt
+        for i in range(len(kujund)-1, 0, -2): # deformeeritakse küljed esimesest viimase nurgani.
             keskpunkti_x = (kujund[i][0] + kujund[i-1][0])/2
             keskpunkti_y = (kujund[i][1] + kujund[i-1][1])/2
             juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
             kujund.insert(i, juhu_punkt)
+        # viimase ja esimese nurga vahelise külje deformeerimine
+        keskpunkti_x = (kujund[0][0] + kujund[len(kujund)-1][0])/2
+        keskpunkti_y = (kujund[0][1] + kujund[len(kujund)-1][1])/2
+        juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
+        kujund.insert(0, juhu_punkt)
+        
         return kujund
 
-    def tups(kontekst, kujund, baas_muut, baas_deform, udu_muut, udu_deform, kihtide_arv, R, G, B): # loob ühe tupsu deformeeritud hulknurkadest
-        for a in range(baas_deform):
+    def tups(kontekst, kujund, baas_muut, baas_deform, udu_muut, udu_deform, kihtide_arv, R, G, B):
+        # see funktsioon on kirjutatud kunstniku Tyler Hobbs juhiste järgi, mida on võimalik leida aadressilt: https://tylerxhobbs.com/essays/2017/a-generative-approach-to-simulating-watercolor-paints
+        # saadud tulemust ei tasu Hobbsi versiooniga võrrelda. Arenemisruumi on veel palju. ;)
+        for a in range(baas_deform): # aluseks võetakse deformeeritud hulknurk
             baas = deform(kujund, baas_muut)
-        for b in range(kihtide_arv):
+        for b in range(kihtide_arv): # seda hulknurka deformeeritakse veel mitu korda ja tehakse läbipaistvad kihid üksteise peale
             udu = copy.deepcopy(baas)
             for d in range(udu_deform):
                 udu = deform(udu, udu_muut)
             kontekst.move_to(udu[0][0], udu[0][1])
             for e in range(len(udu)):
                 kontekst.line_to(udu[e][0], udu[e][1])
+            kontekst.line_to(udu[0][0], udu[0][1])
             kontekst.set_source_rgba(R, G, B, 0.04)
             kontekst.fill()
     
-    # põhifunktsioon
-    for f in range(10):
-        kujund = hulknurk(10, random.randint(0, laius), random.randint(0, kõrgus), random.randint(kõrgus//4, kõrgus//2))
-        tups(c, kujund, 10, 6, 5, 7, 30, 1, random.uniform(0,1), 0)
+    # põhifunktsioon    
+    if laius < kõrgus: # pildi proportsioonid sõltuvad valitud laiusest ja kõrgusest
+        jagatav = kõrgus
+    else:
+        jagatav = laius
+    
+    for i in range(10): # loob kümme tupsu. suurus sõltub pildi mõõtmete valikust
+        kujund = hulknurk(10, random.randint(0, laius), random.randint(0, kõrgus), random.randint(jagatav//8, jagatav//4))
+        tups(c, kujund, baas_muut = jagatav//50, baas_deform = 7, udu_muut = jagatav//80, udu_deform = 5, kihtide_arv = 30, R = 1, G = random.uniform(0,0.7), B = 0)
 
 def üksik_tups(c, laius, kõrgus):
     # abifunktsioonid
