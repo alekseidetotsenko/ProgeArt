@@ -8,6 +8,8 @@ from os import listdir
 def lõuend(cr, muster, laius, kõrgus, taust, värv):
     if taust == 1:
         cr.set_source_rgb(värv[0][0]/255.0, värv[0][1]/255.0, värv[0][2]/255.0)
+        cr.rectangle(0, 0, laius, kõrgus)
+        cr.fill()
     
     eval(muster)(cr, laius, kõrgus) # valib funktsiooni ja annab sellele vajalikud argumendid
     
