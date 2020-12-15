@@ -397,9 +397,8 @@ def võrknurkne(c, laius, kõrgus):
             nurga_y = y + raadius*math.sin(i*θ)
             kujund.append((nurga_x, nurga_y))
         return kujund
-
     # põhifunktsioon
-    for i in range(1000):
+    for i in range(int((laius*1.679)//(laius*0.0015))):
         keskpunkt_x, keskpunkt_y = random.randint(0, laius), random.randint(0, kõrgus)
         nurgad = random.randint(3, 12)
         raadius = random.randint(30, kõrgus//2)
@@ -409,21 +408,23 @@ def võrknurkne(c, laius, kõrgus):
             c.line_to(kujund[j-1][0], kujund[j-1][1])
             värv_hall = random.uniform(0, 1)
             c.set_source_rgb(värv_hall, värv_hall, värv_hall)
-            c.set_line_width(0.2)
+            joone_laius = (laius * 0.03367) / 100
+            c.set_line_width(joone_laius)
         c.stroke()
 
 def jooneline(c, laius, kõrgus):
     # põhifunktsioon
-    for i in range(2000):
-        algus_x = random.randint(-100, laius + 100) # üle ääre
-        algus_y = random.randint(-100, kõrgus + 100)
-        lõpp_x = random.randint(-100, laius + 100)
-        lõpp_y = random.randint(-100, kõrgus + 100)
+    for i in range(int(laius*3.367)//int(laius*0.0015)): # et joonte arv kasvaks sobivalt
+        algus_x = random.randint(-(laius*0.25), laius + (laius*0.25)) # üle ääre
+        algus_y = random.randint(-(kõrgus*0.25), kõrgus + (kõrgus*0.25))
+        lõpp_x = random.randint(-(laius*0.25), laius + (laius*0.25))
+        lõpp_y = random.randint(-(kõrgus*0.25), kõrgus + (kõrgus*0.25))
         joone_värv = random.uniform(0, 1)
         c.set_source_rgb(joone_värv, joone_värv, joone_värv)
         c.move_to(algus_x, algus_y)
         c.line_to(lõpp_x, lõpp_y)
-        c.set_line_width(0.2)
+        joone_laius = (laius * 0.03367) / 100        
+        c.set_line_width(joone_laius)
         c.stroke()        
 
 def natuke_sassis(c, laius, kõrgus):
@@ -467,14 +468,13 @@ def paberlennukid(c, laius, kõrgus):
         return kujund
     
     # põhifunktsioon
-    for i in range(kõrgus): # luuakse hulknurgad vastavalt pildi kõrgusele, et tagada ühtlane kattumine
+    for i in range(kõrgus):
         # igas tsükli käigus tekib üks juhuslik nelinurk
         nurk_1 = (random.randint(0, laius), random.randint(0, kõrgus))
         nurk_2 = (random.randint(0, laius), random.randint(0, kõrgus))
         nurk_3 = (random.randint(0, laius), random.randint(0, kõrgus))
         nurk_4 = (random.randint(0, laius), random.randint(0, kõrgus))
         ristkülik = [nurk_1, nurk_2, nurk_3, nurk_4]
-        
         # seejärel deformeeritakse külgi
         for j in range(5):
             kujund = deform(ristkülik, 5)
