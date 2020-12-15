@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter.colorchooser import askcolor
 from PIL import ImageTk,Image
 from os import listdir, path
 import cairo, math, random, copy # siia kõik, mida mustrite juures kasutatud on. vb oleks parem seda kuidagi teisiti teha
@@ -12,11 +13,12 @@ def loo_muster():
     laius = kast_pildi_laius.get()
     failinimi = kast_faili_nimi.get()
     kunstityyp = valitud_nimi
+    taust = valik_taust.get()
     
     if valitud_tüüp.get() == 1:
-        l.svg_fail(kunstityyp, int(laius), int(kõrgus), failinimi)
+        l.svg_fail(kunstityyp, int(laius), int(kõrgus), failinimi, taust, värv)
     else:
-        l.png_fail(kunstityyp, int(laius), int(kõrgus), failinimi)
+        l.png_fail(kunstityyp, int(laius), int(kõrgus), failinimi, taust, värv)
 
 
 
@@ -97,6 +99,12 @@ def näidise_valik(*args):
     # dropdown menüü valiku uuendus
     valik.set(valikud[pildi_nr])
 
+def vali_värv():
+    global värv
+    värv = askcolor(title = "Tausta värv")
+
+    nupp_vali_värv = Button(raam, text= "      ", command = vali_värv, bg = värv[1], fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv, highlightthickness = 0)
+    nupp_vali_värv.grid(row=2, rowspan=1, column=3, columnspan=3, sticky= W)
 
 # raam
 raam = Tk()
@@ -194,6 +202,14 @@ nupp_edasi = Button(raam, text = ">>", command = lambda: edasi(1), bg = nupu_tau
 nupp_edasi.grid(row = edasi_nupu_rida, column = edasi_nupu_veerg, sticky = E)
 nupp_tagasi = Button(raam, text = "<<", command = lambda: tagasi(piir), bg = nupu_tausta_värv, fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
 nupp_tagasi.grid(row = tagasi_nupu_rida, column = tagasi_nupu_veerg, sticky = W)
+
+värv = (0,0,0)
+#tausta värvi valiku nupp
+valik_taust = IntVar()
+kas_taust = Checkbutton(raam, text='Taust: ', variable = valik_taust, command=vali_värv, selectcolor = tausta_värv, highlightbackground = tausta_värv, activebackground = tausta_värv, activeforeground = teksti_värv, fg = teksti_värv, bg = tausta_värv)
+kas_taust.grid(row = 2, column = 2, sticky = E)
+
+
 nupp_loo_muster = Button(raam, text='Loo disain', font = 'Helvetica 10 bold', command = loo_muster, fg = mustri_nupu_tekst, bg = mustri_nupu_taust, pady = 5, bd = 1, activebackground = mustri_nupp_vajutades, activeforeground = mustri_nupu_tekst)
 nupp_loo_muster.grid(row = mustri_nupu_rida, rowspan = 1, column = mustri_nupu_veerg, columnspan = mustri_nupu_ulatus, sticky = W + E + N + S)
 
@@ -226,6 +242,5 @@ silt_pildi_kõrgus.grid(row = kõrguse_sildi_rida, column = kõrguse_sildi_veerg
 kast_pildi_kõrgus = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_pildi_kõrgus.grid(row = kõrguse_kasti_rida, column = kõrguse_kasti_veerg, sticky = W)
 kast_pildi_kõrgus.insert(0,'3060')
-
 
 raam.mainloop()
