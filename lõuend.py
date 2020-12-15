@@ -18,7 +18,7 @@ def lõuend(cr, muster, laius, kõrgus, taust, värv):
     
 # funktsioonid svg ja png loomiseks
 def svg_fail(muster, laius, kõrgus, faili_nimi, taust, värv):
-    pilt = cairo.SVGSurface(faili_nimi + '.svg', laius, kõrgus)
+    pilt = cairo.SVGSurface('Valminud kunstiteosed/' +faili_nimi + '.svg', laius, kõrgus)
     c = cairo.Context(pilt)
     lõuend(c, muster, laius, kõrgus, taust, värv)#teeb pildi põhja ja kutsub välja vastava
     
