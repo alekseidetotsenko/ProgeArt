@@ -345,29 +345,45 @@ def üksik_tups(c, laius, kõrgus):
         return kujund
 
     def deform(kujund, muut):
-        for i in range(len(kujund)-1, 0, -2):
+        for i in range(len(kujund)-1, 0, -2): # deformeeritakse iga külg - ettevaatust! väga koormav arvutile!
             keskpunkti_x = (kujund[i][0] + kujund[i-1][0])/2
             keskpunkti_y = (kujund[i][1] + kujund[i-1][1])/2
             juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
             kujund.insert(i, juhu_punkt)
+        # viimase ja esimese nurga vahelise külje deformeerimine
+        keskpunkti_x = (kujund[0][0] + kujund[len(kujund)-1][0])/2
+        keskpunkti_y = (kujund[0][1] + kujund[len(kujund)-1][1])/2
+        juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
+        kujund.insert(0, juhu_punkt)
+        
         return kujund
 
     def tups(kontekst, kujund, baas_muut, baas_deform, udu_muut, udu_deform, kihtide_arv, R, G, B):
-        for a in range(baas_deform):
+        # see funktsioon on kirjutatud kunstniku Tyler Hobbs juhiste järgi, mida on võimalik leida aadressilt: https://tylerxhobbs.com/essays/2017/a-generative-approach-to-simulating-watercolor-paints
+        # saadud tulemust ei tasu Hobbsi versiooniga võrrelda. Arenemisruumi on veel palju. ;)
+        for a in range(baas_deform): # Aluseks võetakse deformeeritud hulknurk. See annab lõpptulemusele üldise kuju.
             baas = deform(kujund, baas_muut)
-        for b in range(kihtide_arv):
-            udu = copy.deepcopy(baas)
+        for b in range(kihtide_arv): # Baas hulknurka deformeeritakse veel mitu korda ja tehakse läbipaistvad kihid üksteise peale
+            udu = copy.deepcopy(baas) # Koopia on vajalik, kuna iga järgnev deformeerimine peab lähtuma samast baasist.
             for d in range(udu_deform):
                 udu = deform(udu, udu_muut)
-            kontekst.move_to(udu[0][0], udu[0][1])
+            kontekst.move_to(udu[0][0], udu[0][1]) # Saadud hulknurk joonistatakse üles.
             for e in range(len(udu)):
                 kontekst.line_to(udu[e][0], udu[e][1])
-            kontekst.set_source_rgba(R, G, B, 0.04)
+            kontekst.line_to(udu[0][0], udu[0][1])
+            kontekst.set_source_rgba(R, G, B, 0.06) # veidi vähem läbipaistvust kui mitme tupsuga mustril
             kontekst.fill()
     
     # põhifunktsioon
-    kujund = hulknurk(10, laius//2, kõrgus//2, kõrgus//3)
-    tups(c, kujund, 10, 6, 5, 7, 30, 1, 1, 1)
+    if laius < kõrgus: # pildi proportsioonid sõltuvad valitud laiusest ja kõrgusest
+        jagatav = laius
+    else:
+        jagatav = kõrgus
+    # Argumendid on valitud selle järgi, et kujund valitud mõõtmetega pildile ära mahuks aga samas ka hea välja näeks.
+    # See on saavutatud katse-eksituse meetodil.
+    kujund = hulknurk(nurgad = 10, keskpunkt_x = laius//2, keskpunkt_y = kõrgus//2, raadius = 1)
+    tups(c, kujund, baas_muut = jagatav//20, baas_deform = 2, udu_muut = jagatav//12, udu_deform = 7, kihtide_arv = 80, R = 1, G = 1, B = 1)
+
 
 def võrknurkne(c, laius, kõrgus):
     # abifunktsioon
