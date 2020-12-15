@@ -246,8 +246,42 @@ def sibulad(c, laius, kõrgus):
 
 # indreku mustrid ... tututuuu pikk jutt et ma pärast üles leiaks, kus nad on ... peaks 'tututuuu' panema ühe mustri nimeks ... Hea mõte :)
 
-def tupsud(c, laius, kõrgus):
+def siksakiline(c, laius, kõrgus):
+    # abifunktsioonid
+    def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius): # loob hulknurga punktid
+        θ = (2*math.pi)/nurgad
+        x = keskpunkt_x
+        y = keskpunkt_y
+        kujund = []
+        for i in range(nurgad+1):
+            nurga_x = x + raadius*math.cos(i*θ)
+            nurga_y = y + raadius*math.sin(i*θ)
+            kujund.append((nurga_x, nurga_y))
+        return kujund
+
+    def deform(kujund, muut): # lisab iga punkti vahele juhuslikult uue punkti
+        for i in range(len(kujund)-1, 0, -2):
+            keskpunkti_x = (kujund[i][0] + kujund[i-1][0])/2
+            keskpunkti_y = (kujund[i][1] + kujund[i-1][1])/2
+            juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
+            kujund.insert(i, juhu_punkt)
+        return kujund
+
+    # põhifunktsioon
+    for i in range(laius//100):
+        kujund = hulknurk(random.randint(5, 12), random.randint(laius//10, laius), random.randint(kõrgus//10, kõrgus), kõrgus//random.randint(2, 5))
+        
+        for i in range(8):
+            kujund = deform(kujund, 14)
+        
+        c.move_to(kujund[0][0], kujund[0][1])
+        for e in range(len(kujund)):
+            c.line_to(kujund[e][0], kujund[e][1])
+        fikseeritud_värv = random.uniform(0.5, 0.8)
+        c.set_source_rgba(fikseeritud_värv, fikseeritud_värv, fikseeritud_värv, random.uniform(0.1, 0.5))
+        c.fill()
     
+def tupsud(c, laius, kõrgus):    
     # abifunktsioonid
     def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius): # loob hulknurga punktid
         θ = (2*math.pi)/nurgad
@@ -282,14 +316,11 @@ def tupsud(c, laius, kõrgus):
             kontekst.fill()
     
     # põhifunktsioon
-    c.set_source_rgba(0, 0, 0, 1) # tausta värv
-    c.paint() # taust
     for f in range(10):
         kujund = hulknurk(10, random.randint(0, laius), random.randint(0, kõrgus), random.randint(kõrgus//4, kõrgus//2))
         tups(c, kujund, 10, 6, 5, 7, 30, 1, random.uniform(0,1), 0)
 
 def üksik_tups(c, laius, kõrgus):
-    
     # abifunktsioonid
     def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius):
         θ = (2*math.pi)/nurgad
@@ -324,13 +355,10 @@ def üksik_tups(c, laius, kõrgus):
             kontekst.fill()
     
     # põhifunktsioon
-    c.set_source_rgba(0, 0, 0, 1) # must taust. alpha = 1.
-    c.paint()
     kujund = hulknurk(10, laius//2, kõrgus//2, kõrgus//3)
     tups(c, kujund, 10, 6, 5, 7, 30, 1, 1, 1)
 
 def võrknurkne(c, laius, kõrgus):
-
     # abifunktsioon
     def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius):
         θ = (2*math.pi)/nurgad
@@ -344,10 +372,7 @@ def võrknurkne(c, laius, kõrgus):
         return kujund
 
     # põhifunktsioon
-    tsüklite_arv = 1000
-    c.set_source_rgb(0,0,0)
-    c.paint()
-    for i in range(tsüklite_arv):
+    for i in range(1000):
         keskpunkt_x, keskpunkt_y = random.randint(0, laius), random.randint(0, kõrgus)
         nurgad = random.randint(3, 12)
         raadius = random.randint(30, kõrgus//2)
@@ -361,10 +386,7 @@ def võrknurkne(c, laius, kõrgus):
         c.stroke()
 
 def jooneline(c, laius, kõrgus):
-    
-    # põhifunktsioon. abifunktsioone ei ole sellel
-    c.set_source_rgba(1, 1, 1, 1) # valge taustaga
-    c.paint()
+    # põhifunktsioon
     for i in range(2000):
         algus_x = random.randint(-100, laius + 100) # üle ääre
         algus_y = random.randint(-100, kõrgus + 100)
@@ -378,7 +400,6 @@ def jooneline(c, laius, kõrgus):
         c.stroke()        
 
 def natuke_sassis(c, laius, kõrgus):
-    
     # abifunktsioon
     def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius):
         θ = (2*math.pi)/nurgad
@@ -392,8 +413,6 @@ def natuke_sassis(c, laius, kõrgus):
         return kujund
     
     # põhifunktsioon
-    c.set_source_rgba(0, 0, 0, 1)
-    c.paint()
     for i in range(2, 30):
         nurgad = random.randint(5,20)
         raadius = i**2
@@ -411,7 +430,6 @@ def natuke_sassis(c, laius, kõrgus):
         c.restore()
 
 def paberlennukid(c, laius, kõrgus):
-    
     # abifunktsioon
     def deform(kujund, muut):
         for i in range(len(kujund)-1, 0, -2):
@@ -420,29 +438,32 @@ def paberlennukid(c, laius, kõrgus):
             juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
             kujund.insert(i, juhu_punkt)
         return kujund
-
-    c.set_source_rgba(1, 1, 1, 1)
-    c.paint()
-    for i in range(kõrgus):
+    
+    # põhifunktsioon
+    for i in range(kõrgus): # luuakse hulknurgad vastavalt pildi kõrgusele, et tagada ühtlane kattumine
+        # igas tsükli käigus tekib üks juhuslik nelinurk
         nurk_1 = (random.randint(0, laius), random.randint(0, kõrgus))
         nurk_2 = (random.randint(0, laius), random.randint(0, kõrgus))
         nurk_3 = (random.randint(0, laius), random.randint(0, kõrgus))
         nurk_4 = (random.randint(0, laius), random.randint(0, kõrgus))
         ristkülik = [nurk_1, nurk_2, nurk_3, nurk_4]
+        
+        # seejärel deformeeritakse külgi
         for j in range(5):
             kujund = deform(ristkülik, 5)
         c.move_to(kujund[0][0], kujund[0][1])
         for k in range(len(kujund)):
             c.line_to(kujund[k][0], kujund[k][1])
+        
+        # värvi valik
         värv = random.uniform(0.4, 1)
         c.set_source_rgba(värv, värv, 0.8, 1)
-        c.fill()
+        c.fill() # üks kujund valmis
 
 def võõp(c, laius, kõrgus):
-    c.set_source_rgba(0, 0, 0, 1) # tausta värv
-    c.paint()
-    for i in range(laius*30):
-        värv = random.uniform(0.5, 0.8) # et G ja B väärtused tuleksid samad - värv: teal
+    # põhifunktsioon
+    for i in range(laius*30): # pind kaetakse väga paljude juhuslikult paigutatud läbipaistvate ristkülikutega
+        värv = random.uniform(0.5, 0.8) # et G ja B väärtused tuleksid samad - värv: rohekas sinine
         c.set_source_rgba(0.3, värv, värv, 0.05)
         x = random.randint(laius//kõrgus, laius - laius//45) # kõik väärtused sõltuvad laiusest ja kõrgusest
         y = random.randint(0, kõrgus - kõrgus//9)
@@ -450,3 +471,4 @@ def võõp(c, laius, kõrgus):
         ristkülik_kõrgus = random.randint(0, int(random.gauss(kõrgus//5, laius//50)))
         c.rectangle(x, y, ristkülik_laius, ristkülik_kõrgus)
         c.fill()
+
