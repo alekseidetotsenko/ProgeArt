@@ -50,9 +50,26 @@ def mäed(cr, laius, kõrgus):
     zoom2 = .01
     
     cr.set_line_width(10)
+    
+    paigal = random.randint(0, 2)
+    rgb = (random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1))
+    
     for i in range(0, kõrgus, round(kõrgus/15)):
         os = OpenSimplex(random.randint(0, 2**20))
-        cr.set_source_rgba(0.7, 1-(0.4*i)/kõrgus, 1-(0.9*i)/kõrgus, 1)
+        if paigal == 0:
+            r = rgb[0]
+            g = 1-(rgb[1]*i)/kõrgus
+            b = 1-(rgb[2]*i)/kõrgus
+        elif paigal == 1:
+            r = 1-(rgb[0]*i)/kõrgus
+            g = rgb[1]
+            b = 1-(rgb[2]*i)/kõrgus
+        else:
+            r = 1-(rgb[0]*i)/kõrgus
+            g = 1-(rgb[1]*i)/kõrgus
+            b = rgb[2]
+        #cr.set_source_rgba(0.7, 1-(0.4*i)/kõrgus, 1-(0.9*i)/kõrgus, 1)
+        cr.set_source_rgb(r, g, b)
         cr.line_to(0, i)
         for j in range(0, laius, round(laius/80)):
             müra = (os.noise2d(j*zoom,i*zoom)*2+os.noise2d(j*zoom1,i*zoom1)/2+os.noise2d(j*zoom2,i*zoom2)/4)*100
@@ -73,6 +90,18 @@ def punkt_ringis(cr, os, a, i):
     x = r*math.cos(j)
     y = r*math.sin(j)
     cr.line_to(x,y)
+    
+def laik(i):
+    r = i * min(laius, kõrgus)/20
+    a=0
+    while a <= 2*math.pi:
+        punkt_ringis(cr, os, a, r)
+        cr.rotate(j)
+        a+=j
+    cr.rotate(2*math.pi-a)
+    punkt_ringis(cr, os, 0, r)
+    
+    
 def müra_ringid(cr, laius, kõrgus):
     
     os = OpenSimplex(random.randint(0, 2**20))
@@ -82,14 +111,7 @@ def müra_ringid(cr, laius, kõrgus):
     cr.translate(laius/2, kõrgus/2)
     j = 0.1
     for i in range(8):
-        r = i * min(laius, kõrgus)/20
-        a=0
-        while a <= 2*math.pi:
-            punkt_ringis(cr, os, a, r)
-            cr.rotate(j)
-            a+=j
-        cr.rotate(2*math.pi-a)
-        punkt_ringis(cr, os, 0, r)
+        laik(i)
         cr.stroke()
 
 def pusa(cr, laius, kõrgus):
@@ -142,9 +164,25 @@ def udu(cr, laius, kõrgus):
     zoom1 = .004
     zoom2 = .01
     
-    
+    rgb = (random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1))
+    paigal = random.randint(0, 3)
     for i in range(round(kõrgus/15), kõrgus, round(kõrgus/15)):
-        cr.set_source_rgba(0.5, (0.5*i)/kõrgus, (1*i)/kõrgus, (1*i)/kõrgus)
+        if paigal == 0:
+            r = rgb[0]
+            g = (rgb[1]*i)/kõrgus
+            b = (rgb[2]*i)/kõrgus
+        elif paigal == 1:
+            r = (rgb[0]*i)/kõrgus
+            g = rgb[1]
+            b = (rgb[2]*i)/kõrgus
+        else:
+            r = (rgb[0]*i)/kõrgus
+            g = (rgb[1]*i)/kõrgus
+            b = rgb[2]
+            
+        
+        #cr.set_source_rgba(0.5, (0.5*i)/kõrgus, (1*i)/kõrgus, (1*i)/kõrgus)
+        cr.set_source_rgba(r, g, b, (1*i)/kõrgus)
         cr.line_to(0, i)
         for j in range(0, laius, round(laius/80)):
             müra = (os.noise2d(j*zoom,i*zoom)*2+os.noise2d(j*zoom1,i*zoom1)/2+os.noise2d(j*zoom2,i*zoom2)/4)*100
@@ -206,7 +244,7 @@ def sibulad(c, laius, kõrgus):
                 c.arc(x, y, raadius - i, 0, 2 * math.pi)
                 c.stroke()
 
-# indreku mustrid ... tututuuu pikk jutt et ma pärast üles leiaks, kus nad on ... peaks 'tututuuu' panema ühe mustri nimeks
+# indreku mustrid ... tututuuu pikk jutt et ma pärast üles leiaks, kus nad on ... peaks 'tututuuu' panema ühe mustri nimeks ... Hea mõte :)
 
 def tupsud(c, laius, kõrgus):
     
