@@ -91,18 +91,7 @@ def punkt_ringis(cr, os, a, i):
     y = r*math.sin(j)
     cr.line_to(x,y)
     
-def laik(i):
-    r = i * min(laius, kõrgus)/20
-    a=0
-    while a <= 2*math.pi:
-        punkt_ringis(cr, os, a, r)
-        cr.rotate(j)
-        a+=j
-    cr.rotate(2*math.pi-a)
-    punkt_ringis(cr, os, 0, r)
-    
-    
-def müra_ringid(cr, laius, kõrgus):
+def ringid(cr, laius, kõrgus):
     
     os = OpenSimplex(random.randint(0, 2**20))
     
@@ -111,7 +100,14 @@ def müra_ringid(cr, laius, kõrgus):
     cr.translate(laius/2, kõrgus/2)
     j = 0.1
     for i in range(8):
-        laik(i)
+        r = i * min(laius, kõrgus)/20
+        a=0
+        while a <= 2*math.pi:
+            punkt_ringis(cr, os, a, r)
+            cr.rotate(j)
+            a+=j
+        cr.rotate(2*math.pi-a)
+        punkt_ringis(cr, os, 0, r)
         cr.stroke()
 
 def pusa(cr, laius, kõrgus):
