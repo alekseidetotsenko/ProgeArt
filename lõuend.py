@@ -1,4 +1,3 @@
-from mustrid import*
 from kunst import *
 from kribukrabu import*
 import cairo
