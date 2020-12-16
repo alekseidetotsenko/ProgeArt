@@ -1009,6 +1009,5 @@ def kiired6(ctx,WIDTH,HEIGHT):
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
         ctx.arc(x, x, 120, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
-        ctx.fill()
         ctx.restore()#taastab punkti
         ctx.stroke()#kannab kanvasele
