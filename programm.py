@@ -235,12 +235,12 @@ silt_pildi_laius = Label(raam, text = 'Laius:', bg = tausta_värv, fg = teksti_v
 silt_pildi_laius.grid(row = laiuse_sildi_rida, column = laiuse_sildi_veerg, sticky = W)
 kast_pildi_laius = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_pildi_laius.grid(row = laiuse_kasti_rida, column = laiuse_kasti_veerg, sticky = W)
-kast_pildi_laius.insert(0,'594')
+kast_pildi_laius.insert(0,'1920')
 
 silt_pildi_kõrgus = Label(raam, text = 'Kõrgus:', bg = tausta_värv, fg = teksti_värv)
 silt_pildi_kõrgus.grid(row = kõrguse_sildi_rida, column = kõrguse_sildi_veerg, sticky = W)
 kast_pildi_kõrgus = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_pildi_kõrgus.grid(row = kõrguse_kasti_rida, column = kõrguse_kasti_veerg, sticky = W)
-kast_pildi_kõrgus.insert(0,'306')
+kast_pildi_kõrgus.insert(0,'1080')
 
 raam.mainloop()

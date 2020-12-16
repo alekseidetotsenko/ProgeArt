@@ -3,6 +3,62 @@ from opensimplex import OpenSimplex #arvutab müra väärtus vastavatele x, y v�
 import cairo, random, math, copy
 
 #Karolini mustrid
+def viga(cr, laius, kõrgus):
+    for siine in range(random.randint(0, 50)):
+        cr.set_source_rgb(random.randint(0, 1), random.randint(0, 1), random.randint(0, 1))
+        cr.set_line_width(random.randint(1, 5))
+        x, y = random.randint(0, laius), random.randint(0,kõrgus)
+        cr.arc(x, y, random.randint(3,6), 0, 2 * math.pi)
+        cr.fill()
+        for pöördeid in range(random.randint(2, 12)):
+            suund = random.randint(0,1)
+            if suund==1:
+                x = random.randint(0, laius)
+            else:
+                y = random.randint(0, kõrgus)
+            cr.line_to(x, y)
+        cr.arc(x, y, random.randint(3,6), 0, 2 * math.pi)
+
+def siinid(cr, laius, kõrgus):    
+    
+    for väikseid_siine in range(random.randint(5, 10)):
+        cr.set_source_rgb(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1))
+        cr.set_line_width(2)
+        x, y = random.randint(0, laius), random.randint(0,kõrgus)
+        for pöördeid in range(random.randint(30, 60)):
+            suund = random.randint(0,3)
+            if suund==1:
+                x = x + random.randint(0, int(laius/20))
+            elif suund==2:
+                x = x - random.randint(0, int(laius/20))
+            elif suund==3:
+                y = y - random.randint(0, int(kõrgus/20))
+            else:
+                y = y + random.randint(0, int(kõrgus/20))
+            cr.line_to(x, y)
+        cr.stroke()
+    
+    minR = int(2*max(kõrgus, laius)/594)
+    maxR = int(5*max(kõrgus, laius)/594)
+    joone_laius = int(3*max(laius, kõrgus)/594)
+    for siine in range(random.randint(10, 30)):
+        cr.set_source_rgb(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1))
+        cr.set_line_width(random.randint(1, joone_laius))
+        x, y = random.randint(0, laius), random.randint(0,kõrgus)
+        
+        cr.arc(x, y, random.randint(minR,maxR), 0, 2 * math.pi)
+        cr.fill()
+        for pöördeid in range(random.randint(2, 12)):
+            suund = random.randint(0,1)
+            if suund==1:
+                x = random.randint(0, laius)
+            else:
+                y = random.randint(0, kõrgus)
+            cr.line_to(x, y)
+        cr.stroke()
+        cr.arc(x, y, random.randint(minR,maxR), 0, 2 * math.pi)
+        cr.fill()
+        
 def kõverik(cr, laius, kõrgus):
     #arvutab joone lauise vastavalt pildi mõõtmetele
     joone_laius = 2*max(laius, kõrgus)/594
