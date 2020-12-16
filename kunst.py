@@ -2,9 +2,9 @@ from opensimplex import OpenSimplex
 import cairo, random, math, copy
 
 def kõverik(cr, laius, kõrgus):
-    joon = 2
+    joone_laius = 2*max(laius, kõrgus)/594
     os = OpenSimplex(random.randint(0, 2**20))
-    cr.set_line_width(joon)
+    cr.set_line_width(joone_laius)
     cr.set_source_rgb(0, 0, 0)
     cr.translate(laius/2, kõrgus/2)
     z1 = math.pi/180
