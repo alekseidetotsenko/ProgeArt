@@ -668,7 +668,7 @@ def jooned_nurgast(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgb(line_r, line_g, line_b)
-        ctx.set_line_width(1)
+        ctx.set_line_width(4*x_telje_suhe)
         algus_x = l6pp_x #lõppkoordinaadid alguseks
         algus_y = l6pp_y 
         l6pp_x = random.randint(int(-2000* x_telje_suhe), int(3000* x_telje_suhe)) #uued random lõppkoordinaadid
@@ -685,7 +685,7 @@ def joonedkeskelt(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgb(line_r, line_g, line_b)
-        ctx.set_line_width(2) #joone laius
+        ctx.set_line_width(6*x_telje_suhe) #joone laius
         ctx.stroke()#kannab kanvasele
 
 def ringid_valged(ctx,WIDTH,HEIGHT):
