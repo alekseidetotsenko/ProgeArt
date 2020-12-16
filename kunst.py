@@ -313,7 +313,8 @@ def sibulad(c, laius, kõrgus):
                 c.arc(x, y, raadius - i, 0, 2 * math.pi)
                 c.stroke()
 
-# indreku mustrid ... tututuuu pikk jutt et ma pärast üles leiaks, kus nad on ... peaks 'tututuuu' panema ühe mustri nimeks ... Hea mõte :)
+###########################################################################################################################
+# Indreku mustrid algavad siit
 
 def siksakiline(c, laius, kõrgus):
     # abifunktsioonid
@@ -573,6 +574,75 @@ def võõp(c, laius, kõrgus):
         c.rectangle(x, y, ristkülik_laius, ristkülik_kõrgus)
         c.fill()
 
+def ühe_kliki_rothko(c, laius, kõrgus):
+    # abifunktsioon
+    def deform(kujund, muut): # liigendab hulknurga kõik küljed, lisades iga kahe nurga vahele uue nurga
+        # kuni eelviimase küljeni
+        for i in range(len(kujund)-1, 0, -1):
+            keskpunkti_x = (kujund[i][0] + kujund[i-1][0])/2
+            keskpunkti_y = (kujund[i][1] + kujund[i-1][1])/2
+            juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
+            kujund.insert(i, juhu_punkt)
+        # viimase külje liigendamine
+        keskpunkti_x = (kujund[0][0] + kujund[len(kujund)-1][0])/2
+        keskpunkti_y = (kujund[0][1] + kujund[len(kujund)-1][1])/2
+        juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
+        kujund.insert(0, juhu_punkt)
+        return kujund
+
+    # põhifunktsioon
+    muut = laius//100 # kui suured sakid on ristkülikul
+    udu = 8 # kui mitu korda deformeeritakse
+    kihid = 80 # mitu deformeeritud kihti üksteise peale laotakse
+    
+    ühikud = 17 # mitmeks ühikuks pilti saab jaotada
+    l = laius // ühikud # laiuse ühik
+    k = kõrgus // ühikud # kõrguse ühik
+    
+    tsüklid = random.randint(1, 6)
+    h = 0 # sellest tuleb ristküliku kõrgus
+    n = 0 # salvestab kui kaugele tsüklis jõuti
+    for i in range(tsüklid):
+        n += 1
+        α = random.randint(1, 2) # vasaku/ülemise ääre laius
+        β = ühikud - α # parema/alumise ääre laius
+        
+        eelmise_lõpp = min(h + α*k, β*k) # esimese ristküliku puhul on eelmise lõpuks välimine ääris
+        if eelmise_lõpp == β*k:
+            break        
+        
+        # ristküliku loomine
+        h = k + random.randint(eelmise_lõpp, β*k) # ristküliku kõrgus
+        ristkülik = [(α*l, eelmise_lõpp), (β*l, eelmise_lõpp), (β*l, h), (α*l, h)]
+        eelmise_lõpp = h + α*k
+        
+        # udutamine
+        c.set_source_rgba(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1), 0.06)
+        for j in range(kihid):
+            rothko_ristkülik = copy.deepcopy(ristkülik)
+            for d in range(udu):
+                rothko_ristkülik = deform(rothko_ristkülik, muut)
+            c.move_to(rothko_ristkülik[0][0], rothko_ristkülik[0][1])
+            for e in range(len(rothko_ristkülik)):
+                c.line_to(rothko_ristkülik[e][0], rothko_ristkülik[e][1])
+            c.fill()
+    
+    # kui on ühe ristküliku jaoks veel ruumi, luuakse üks, mis ulatub lõpuni
+    if n == tsüklid and eelmise_lõpp + 2*α*k < β*k:
+        α = random.randint(1, 2)
+        β = ühikud - α
+        
+        ristkülik = [(α*l, eelmise_lõpp), (β*l, eelmise_lõpp), (β*l, β*k), (α*l, β*k)]
+        
+        c.set_source_rgba(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1), 0.06)
+        for j in range(kihid):
+            rothko_ristkülik = copy.deepcopy(ristkülik)
+            for d in range(udu):
+                rothko_ristkülik = deform(rothko_ristkülik, muut)
+            c.move_to(rothko_ristkülik[0][0], rothko_ristkülik[0][1])
+            for e in range(len(rothko_ristkülik)):
+                c.line_to(rothko_ristkülik[e][0], rothko_ristkülik[e][1])
+            c.fill()
 
 
 # # # # # # # # # # # # # # # # # # # # # # 
