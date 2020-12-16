@@ -1,15 +1,21 @@
-from opensimplex import OpenSimplex
+from opensimplex import OpenSimplex #arvutab müra väärtus vastavatele x, y väärtustele
+
 import cairo, random, math, copy
 
+#mustreid loovad funktsioonid
 def kõverik(cr, laius, kõrgus):
+    #arvutab joone lauise vastavalt pildi mõõtmetele
     joone_laius = 2*max(laius, kõrgus)/594
     os = OpenSimplex(random.randint(0, 2**20))
     cr.set_line_width(joone_laius)
     cr.set_source_rgb(0, 0, 0)
+    #viib null punkti keskele
     cr.translate(laius/2, kõrgus/2)
+    #arvutab kui lähedal müravärja vaadeldakse 
     z1 = math.pi/180
     z = 0.5
     j = math.pi/90
+    #arvutab raadiuse vastavalt pildi mõõtmetele
     suhe = min(laius, kõrgus)/4
     a=0
     while a < 2*math.pi:
@@ -20,6 +26,7 @@ def kõverik(cr, laius, kõrgus):
         x = r*math.cos(j)
         y = r*math.sin(j)
         cr.line_to(x,y)
+        #keerab pilti j kraadi
         cr.rotate(j)
         a+=j
         
@@ -30,12 +37,13 @@ def joonestik(cr, laius, kõrgus):
     zoom = .002
     zoom1 = .006
     zoom2 = .009
-    
+    joone_laius = 2*max(laius, kõrgus)/594
     cr.set_source_rgb(0, 0, 0)
-    cr.set_line_width(2)
+    cr.set_line_width(joone_laius)
     for i in range(round(kõrgus/15), kõrgus, round(kõrgus/15)):
         müra = (os.noise2d(0*zoom,i*zoom)*2+os.noise2d(0*zoom1,i*zoom1)/2+os.noise2d(0*zoom2,i*zoom2)/4)*100
         cr.move_to(0, i + müra)
+        #liigub üle pildi ja teeb joone 
         for j in range(0, laius, round(laius/80)):
             müra = (os.noise2d(j*zoom,i*zoom)*2+os.noise2d(j*zoom1,i*zoom1)/2+os.noise2d(j*zoom2,i*zoom2)/4)*100
             cr.line_to(j, i+müra)
@@ -48,15 +56,14 @@ def mäed(cr, laius, kõrgus):
     zoom = .002
     zoom1 = .004
     zoom2 = .01
-    
-    cr.set_line_width(10)
-    
+    #valib milliine värv on paigal     
     paigal = random.randint(0, 2)
+    
     rgb = (random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1))
     
     for i in range(0, kõrgus, round(kõrgus/15)):
         os = OpenSimplex(random.randint(0, 2**20))
-        if paigal == 0:
+        if paigal == 0:#valib värvi kombinatsioonid et tekiks 
             r = rgb[0]
             g = 1-(rgb[1]*i)/kõrgus
             b = 1-(rgb[2]*i)/kõrgus
@@ -74,12 +81,14 @@ def mäed(cr, laius, kõrgus):
         for j in range(0, laius, round(laius/80)):
             müra = (os.noise2d(j*zoom,i*zoom)*2+os.noise2d(j*zoom1,i*zoom1)/2+os.noise2d(j*zoom2,i*zoom2)/4)*100
             cr.line_to(j, i+müra)
+        #teeb kasti ja värvib selle
         cr.line_to(laius, i+müra)
         cr.line_to(laius, kõrgus)
         cr.line_to(0, kõrgus)
         cr.fill()
-
+#kasutusel ringid funktsioonis
 def punkt_ringis(cr, os, a, i):
+    #joonistab joone uue x,y väärtuseni
     z2 = 1
     z = .05
     j = 0.1
@@ -94,18 +103,21 @@ def punkt_ringis(cr, os, a, i):
 def ringid(cr, laius, kõrgus):
     
     os = OpenSimplex(random.randint(0, 2**20))
-    
-    cr.set_line_width(2)
+    joone_laius = 2*max(laius, kõrgus)/594
+    cr.set_line_width(joone_laius)
     cr.set_source_rgb(.4, .4, .4)
     cr.translate(laius/2, kõrgus/2)
     j = 0.1
+    #mitu lopergust ringi üksteise sees
     for i in range(8):
         r = i * min(laius, kõrgus)/20
         a=0
+        #loob loperguse ringi
         while a <= 2*math.pi:
             punkt_ringis(cr, os, a, r)
             cr.rotate(j)
             a+=j
+        #lõpetab ringi ilusti
         cr.rotate(2*math.pi-a)
         punkt_ringis(cr, os, 0, r)
         cr.stroke()
@@ -113,7 +125,8 @@ def ringid(cr, laius, kõrgus):
 def pusa(cr, laius, kõrgus):
     
     os = OpenSimplex(random.randint(0, 2**20))
-    cr.set_line_width(2)
+    joone_laius = 2*max(laius, kõrgus)/594
+    cr.set_line_width(joone_laius)
     cr.set_source_rgb(0, 0, 0)
     cr.translate(laius/2, kõrgus/2)
     z1 = math.pi/180
@@ -133,7 +146,7 @@ def pusa(cr, laius, kõrgus):
         a+=j
         
     cr.stroke()
-    
+#värvib piksli kaardi funktsioonis    
 def värvi(cr, x, y):
     cr.set_source_rgba(0, 0, 0, 0.5)
     cr.rectangle(x, y, 1, 1)
@@ -146,7 +159,10 @@ def kaart(cr, laius, kõrgus):
     for i in range(laius):
         for j in range(kõrgus):
             müra = (1.0+os.noise2d(x=i*zoom, y=j*zoom))/2.0
+            #asvutab soovitud vahemikud
             for x in range(1, 20):
+                #kontrollib kas müra antud väärtus on voovitud vahemikes
+
                 if müra<0.30 and x/20<müra<(x/20)+0.01:
                     värvi(cr, i, j)
                 elif müra>0.70 and 1-(x/20)<müra<(1-(x/20))+0.01:
@@ -199,7 +215,7 @@ def sebra(cr, laius, kõrgus):
                 cr.set_source_rgb(.9, .9, .9)
                 cr.rectangle(i, j, 1, 1)
                 cr.fill()
-                
+#joonistab ringi mullid funktsioonis            
 def kera(cr, x, y, raadius):
     cr.set_source_rgba(random.randint(0, 1), random.randint(0, 1), random.randint(0, 1), 0.05)
     cr.arc(x, y, raadius, 0, 2 * math.pi)
@@ -229,7 +245,8 @@ def õli(cr, laius, kõrgus):
                 cr.fill()
         
 def sibulad(c, laius, kõrgus):
-    c.set_line_width(10)
+    joone_laius = 2*max(laius, kõrgus)/594
+    c.set_line_width(joone_laius)
     for i in range(0, random.randint(10,20)):
         x = random.randint(0, laius)
         y = random.randint(0, kõrgus)
