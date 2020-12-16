@@ -916,6 +916,7 @@ def kiired1(ctx,WIDTH,HEIGHT):
         ctx.rotate(i*math.pi/36) #rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
         ctx.arc(i, i, 120, 0, 2*math.pi)  #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.fill()
         ctx.restore()#taastab punkti
         ctx.stroke()#kannab kanvasele
 
@@ -933,6 +934,7 @@ def kiired2(ctx,WIDTH,HEIGHT):
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
         ctx.arc(i, i, a, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.fill()
         ctx.restore()#taastab punkti
         ctx.stroke()#kannab kanvasele
 
@@ -950,6 +952,7 @@ def kiired3(ctx,WIDTH,HEIGHT):
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, d)#skaleerimine
         ctx.arc(i, i, a, a, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.fill()
         ctx.restore()#taastab punkti
         ctx.stroke()#kannab kanvasele
 
@@ -967,6 +970,7 @@ def kiired4(ctx,WIDTH,HEIGHT):
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
         ctx.arc(i, i, a, a, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.fill()
         ctx.restore()
         ctx.stroke()#kannab kanvasele
 
@@ -985,6 +989,7 @@ def kiired5(ctx,WIDTH,HEIGHT):
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, d)#skaleerimine
         ctx.arc(i, i, a, a, u*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.fill()
         ctx.restore()
         ctx.stroke()#kannab kanvasele
 
@@ -1004,5 +1009,6 @@ def kiired6(ctx,WIDTH,HEIGHT):
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
         ctx.arc(x, x, 120, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.fill()
         ctx.restore()#taastab punkti
         ctx.stroke()#kannab kanvasele
