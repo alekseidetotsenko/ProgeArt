@@ -264,11 +264,11 @@ def siksakiline(c, laius, kõrgus):
         return kujund
 
     # põhifunktsioon
-    for i in range(laius//100):
-        kujund = hulknurk(random.randint(5, 12), random.randint(laius//10, laius), random.randint(kõrgus//10, kõrgus), kõrgus//random.randint(2, 5))
+    for i in range(int((laius*0.126)//(laius*0.01))):
+        kujund = hulknurk(random.randint(5, 12), random.randint(laius//10, 8*(laius//10)), random.randint(kõrgus//10, 8*(kõrgus//10)), kõrgus//random.randint(2, 5))
         
         for i in range(8):
-            kujund = deform(kujund, 14)
+            kujund = deform(kujund, laius // 60)
         
         c.move_to(kujund[0][0], kujund[0][1])
         for e in range(len(kujund)):
