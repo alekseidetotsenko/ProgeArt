@@ -2,7 +2,7 @@ from opensimplex import OpenSimplex #arvutab müra väärtus vastavatele x, y v�
 
 import cairo, random, math, copy
 
-#mustreid loovad funktsioonid
+#Karolini mustrid
 def kõverik(cr, laius, kõrgus):
     #arvutab joone lauise vastavalt pildi mõõtmetele
     joone_laius = 2*max(laius, kõrgus)/594
@@ -86,7 +86,7 @@ def mäed(cr, laius, kõrgus):
         cr.line_to(laius, kõrgus)
         cr.line_to(0, kõrgus)
         cr.fill()
-#kasutusel ringid funktsioonis
+#kasutusel järgnevas funktsioonis
 def punkt_ringis(cr, os, a, i):
     #joonistab joone uue x,y väärtuseni
     z2 = 1
@@ -100,7 +100,7 @@ def punkt_ringis(cr, os, a, i):
     y = r*math.sin(j)
     cr.line_to(x,y)
     
-def ringid(cr, laius, kõrgus):
+def kõver_sibul(cr, laius, kõrgus):
     
     os = OpenSimplex(random.randint(0, 2**20))
     joone_laius = 2*max(laius, kõrgus)/594
