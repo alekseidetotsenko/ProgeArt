@@ -594,7 +594,7 @@ def ruudustik(ctx,WIDTH,HEIGHT):
             ctx.line_to(random.randrange(int(-50* y_telje_suhe),int(50* y_telje_suhe)),algus_y)
             ctx.stroke()
        
-def karvanekast(ctx,WIDTH,HEIGHT):
+def paljujoonivasemal(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
     a = int(1500 * x_telje_suhe/y_telje_suhe) #tsüklite arv
