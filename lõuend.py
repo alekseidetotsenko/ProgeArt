@@ -1,5 +1,4 @@
 from kunst import *
-from kribukrabu import*
 import cairo
 from inspect import getmembers, isfunction # nende abil saab kujunduste faili funktsioonidest listi teha
 from os import listdir
