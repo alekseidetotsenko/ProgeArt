@@ -641,11 +641,11 @@ def ruudustik(ctx,WIDTH,HEIGHT):
         ctx.set_source_rgba(line_r, line_g, line_b, random.uniform(0.1,0.5))
         ctx.set_line_width(random.uniform(0.01,1))
         ctx.stroke()#kannab kanvasele
-        for k in range(b):
+        for k in range(b):#lisajooned
             ctx.move_to(algus_x, algus_y)
             ctx.line_to(algus_x,random.randrange(int(-50* x_telje_suhe),int(50* x_telje_suhe)))
             ctx.stroke()
-        for k in range(b):
+        for k in range(b):#lisajooned
             ctx.move_to(algus_x, algus_y)
             ctx.line_to(random.randrange(int(-50* y_telje_suhe),int(50* y_telje_suhe)),algus_y)
             ctx.stroke()
