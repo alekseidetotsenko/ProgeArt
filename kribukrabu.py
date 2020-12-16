@@ -2,25 +2,28 @@ import cairo
 import random
 import math
 
+#juhuslike värvide kogu
 list_of_colors = [(145, 185, 141), (229, 192, 121), (210, 191, 88), (140, 190, 178), (255, 183, 10), (189, 190, 220),
 (197, 239, 247), (190, 144, 212),(221, 79, 91), (16, 182, 98), (227, 146, 80), (241, 133, 123), (110, 197, 233), (235, 205, 188),
  (41, 241, 195), (243, 156, 18), (189, 195, 199), (101, 198, 187), (255, 246, 143), (243, 241, 239)]
 
 
-
+#mustrifuntksioonid
 def dontknowyet(ctx,WIDTH,HEIGHT):
+    #skaleerimise jaoks loodud suhe, kordub iga funktsiooni puhul
     x_telje_suhe = WIDTH / (3*1980)
     y_telje_suhe = HEIGHT / (3*1020)
+    #juhuslikud arvud muutujatele,hiljem tsükliarvudena kasutuses
     a = random.randint(100,3000)
     b = random.randint(10,50)
     for j in range(a):
-        algus_x = random.randint(int(-2000 * x_telje_suhe), int(7000 * x_telje_suhe))
-        algus_y = random.randint(int(-2000 * x_telje_suhe), int(10000 * y_telje_suhe))
-        ctx.move_to(algus_x, algus_y)
-        line_color = random.choice(list_of_colors)
-        line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
+        algus_x = random.randint(int(-2000 * x_telje_suhe), int(7000 * x_telje_suhe)) #juhuslikud arvud muutujatele
+        algus_y = random.randint(int(-2000 * x_telje_suhe), int(10000 * y_telje_suhe)) #juhuslikud arvud muutujatele
+        ctx.move_to(algus_x, algus_y) #liigub x,y pidi
+        line_color = random.choice(list_of_colors) #juhuvärvide kogust määratud rgb
+        line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0 #juhuvärvide kogust määratud rgb
         ctx.set_source_rgb(line_r, line_g, line_b)
-        ctx.set_line_width(random.randint(1,2))
+        ctx.set_line_width(random.randint(1,2)) #joone laius
         for i in range(b):
             ctx.line_to(algus_x,algus_y)
             ctx.rel_line_to(random.randrange(-10,10),random.randrange(-10,10))
