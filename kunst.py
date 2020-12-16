@@ -743,7 +743,7 @@ def spiderpuff(ctx,WIDTH,HEIGHT):
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.set_source_rgb(1, 1, 1) #joone värv
-            ctx.set_line_width(random.randint(0,2))
+            ctx.set_line_width(random.randrange(0,4))
             ctx.stroke() #kannab kanvasele 
 
 def spiderpuffs(ctx,WIDTH,HEIGHT):
@@ -761,7 +761,7 @@ def spiderpuffs(ctx,WIDTH,HEIGHT):
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.set_source_rgb(1, 1, 1)
-            ctx.set_line_width(random.randint(0,2))#joone paksus juhuarv
+            ctx.set_line_width(random.randrange(0,4))#joone paksus juhuarv
             ctx.stroke()    #kannab kanvasele
 
 def susser(ctx,WIDTH,HEIGHT):
