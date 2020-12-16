@@ -408,7 +408,7 @@ def võrknurkne(c, laius, kõrgus):
             c.line_to(kujund[j-1][0], kujund[j-1][1])
             värv_hall = random.uniform(0, 1)
             c.set_source_rgb(värv_hall, värv_hall, värv_hall)
-            joone_laius = (laius * 0.03367) / 100
+            joone_laius = (max(laius, kõrgus) * 0.03367) / 100 # et joone laius oleks proportsioonis valitud laiuse ja kõrgusega
             c.set_line_width(joone_laius)
         c.stroke()
 
@@ -423,7 +423,7 @@ def jooneline(c, laius, kõrgus):
         c.set_source_rgb(joone_värv, joone_värv, joone_värv)
         c.move_to(algus_x, algus_y)
         c.line_to(lõpp_x, lõpp_y)
-        joone_laius = (laius * 0.03367) / 100        
+        joone_laius = (max(laius, kõrgus) * 0.03367) / 100        
         c.set_line_width(joone_laius)
         c.stroke()        
 
@@ -489,7 +489,7 @@ def paberlennukid(c, laius, kõrgus):
 
 def võõp(c, laius, kõrgus):
     # põhifunktsioon
-    tsükli_pikkus = laius*30//int(laius*0.002)
+    tsükli_pikkus = laius*30//int(laius*0.002) # sobitab tsükli pikkuse pildi mõõtmetega, et tulemus näeks hea välja. katse-eksituse meetodil saadud
     for i in range(tsükli_pikkus): # pind kaetakse väga paljude juhuslikult paigutatud läbipaistvate ristkülikutega
         värv = random.uniform(0.5, 0.8) # et G ja B väärtused tuleksid samad - värv: rohekas sinine
         c.set_source_rgba(0.3, värv, värv, 0.05)
