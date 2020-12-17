@@ -833,7 +833,7 @@ def ringid_valged(ctx,WIDTH,HEIGHT):
 def ringid_värvilised(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
-    for i in range(int(20* x_telje_suhe/y_telje_suhe)):
+    for i in range(int(20* x_telje_suhe)):
         r = int(10* x_telje_suhe/y_telje_suhe) #algraadius
         x = random.randint(1,int(HEIGHT)) #juhuslikud alguspunktidele
         y = random.randint(1,int(WIDTH)) #juhuslikud alguspunktidele
