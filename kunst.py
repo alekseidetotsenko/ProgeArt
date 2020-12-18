@@ -1018,7 +1018,7 @@ def kiired1(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,0.2)
-        ctx.set_line_width(random.uniform(0,3(x_telje_suhe+y_telje_suhe)/2))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36) #rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
