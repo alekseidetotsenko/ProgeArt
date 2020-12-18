@@ -669,7 +669,7 @@ def tähed(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors) #juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0 #juhuvärvide kogust määratud rgb
         ctx.set_source_rgb(line_r, line_g, line_b)
-        ctx.set_line_width(random.uniform(1,2)) #joone laius
+        ctx.set_line_width(random.uniform(1*(x_telje_suhe+y_telje_suhe)/2,2*(x_telje_suhe+y_telje_suhe)/2)) #joone laius
         for i in range(b): #lisatsüklid täinedavate joonte tekitamiseks nö star effektiks, kus muutb joonte randomiseerimisulats
             ctx.line_to(algus_x,algus_y)
             ctx.rel_line_to(random.randrange(-10,10),random.randrange(-10,10))
@@ -690,7 +690,7 @@ def raadiolained(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors) #juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b, random.uniform(0.1,0.5))
-        ctx.set_line_width(random.uniform(0.01,3)) 
+        ctx.set_line_width(random.uniform(0.01*(x_telje_suhe+y_telje_suhe)/2,3*(x_telje_suhe+y_telje_suhe)/2)) 
         for k in range(b):
             ctx.move_to(algus_x, algus_y) #liigub x,y pidi
             ctx.rel_line_to(algus_x,random.randrange(int(-50* x_telje_suhe),int(50* x_telje_suhe)))
@@ -709,7 +709,7 @@ def ruudustik(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors) #juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b, random.uniform(0.1,0.5))
-        ctx.set_line_width(random.uniform(0.01,1))
+        ctx.set_line_width(random.uniform(0.01*(x_telje_suhe+y_telje_suhe)/2,1*(x_telje_suhe+y_telje_suhe)/2))
         ctx.stroke()#kannab kanvasele
         for k in range(b):#lisajooned
             ctx.move_to(algus_x, algus_y)
@@ -723,12 +723,12 @@ def ruudustik(ctx,WIDTH,HEIGHT):
 def paljujoonivasemal(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
-    a = int(1500 * x_telje_suhe/y_telje_suhe) #tsüklite arv
+    a = int(1500 * (x_telje_suhe+y_telje_suhe)/2) #tsüklite arv
     for i in range(a):
         ctx.line_to(random.randrange(int(3000* x_telje_suhe)), random.randrange(int(3000* x_telje_suhe))) #põhijoone koordinaadid
         ctx.rel_line_to(random.randrange(int(1000* y_telje_suhe)), random.randrange(int(1000* y_telje_suhe))) #relatiivselt põhikoordinaatidele tekkiva joone koordinaadid
         ctx.set_source_rgb(1, 1, 1)#joone värv must
-        ctx.set_line_width(2*x_telje_suhe)#joone laius
+        ctx.set_line_width(2*(x_telje_suhe+y_telje_suhe)/2)#joone laius
         ctx.stroke()#kannab kanvasele
     
 def hexagonid_värvilised(ctx,WIDTH,HEIGHT):
@@ -744,7 +744,7 @@ def hexagonid_värvilised(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgb(line_r, line_g, line_b)
-        ctx.set_line_width(2*x_telje_suhe) #joone laius 
+        ctx.set_line_width(2*(x_telje_suhe+y_telje_suhe)/2) #joone laius 
         ctx.rel_move_to(HEX_W/3.0, 0) #relatiivse koordinaadi osas nihe
         ctx.rel_line_to(HEX_W/3.0, 0) #relatiivse koordinaadi osas joon
         ctx.rel_line_to(HEX_W/3.0, HEX_H/3.0)
@@ -768,7 +768,7 @@ def hexagonid_must_valge(ctx,WIDTH,HEIGHT):
         HEX_W, HEX_H = (suvaarv, suvaarv) #hexagoni suurus
         ctx.move_to(algus_x, algus_y) #algkoha nihe
         ctx.set_source_rgb(1, 1, 1)#Joone värv must
-        ctx.set_line_width(2*x_telje_suhe)#joone laius
+        ctx.set_line_width(2*(x_telje_suhe+y_telje_suhe)/2)#joone laius
         ctx.rel_move_to(HEX_W/3.0, 0) #relatiivse koordinaadi osas nihe
         ctx.rel_line_to(HEX_W/3.0, 0) #relatiivse koordinaadi osas joon
         ctx.rel_line_to(HEX_W/3.0, HEX_H/3.0)
@@ -794,7 +794,7 @@ def jooned_nurgast(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgb(line_r, line_g, line_b)
-        ctx.set_line_width(4*x_telje_suhe)
+        ctx.set_line_width(4*(x_telje_suhe+y_telje_suhe)/2)
         algus_x = l6pp_x #lõppkoordinaadid alguseks
         algus_y = l6pp_y 
         l6pp_x = random.randint(int(-2000* x_telje_suhe), int(3000* x_telje_suhe)) #uued random lõppkoordinaadid
@@ -805,13 +805,13 @@ def jooned_nurgast(ctx,WIDTH,HEIGHT):
 def joonedkeskelt(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
-    for i in range(int(150*x_telje_suhe)):
+    for i in range(150):
         ctx.line_to(WIDTH/2,HEIGHT/2) #jooned algkoordinaatideni
         ctx.rel_line_to(random.randint(int(-3000* x_telje_suhe),int(3000* x_telje_suhe)),random.randint(int(-3000* y_telje_suhe),int(3000* y_telje_suhe)))
         line_color = random.choice(list_of_colors)#juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgb(line_r, line_g, line_b)
-        ctx.set_line_width(6*x_telje_suhe) #joone laius
+        ctx.set_line_width(6*(x_telje_suhe+y_telje_suhe)/2) #joone laius
         ctx.stroke()#kannab kanvasele
 
 def ringid_valged(ctx,WIDTH,HEIGHT):
@@ -906,7 +906,7 @@ def spiderpuff(ctx,WIDTH,HEIGHT):
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.set_source_rgb(1, 1, 1) #joone värv
-            ctx.set_line_width(random.uniform(0,4))
+            ctx.set_line_width(random.uniform(0,4*(x_telje_suhe+y_telje_suhe)/2))
             ctx.stroke() #kannab kanvasele 
 
 def spiderpuffs(ctx,WIDTH,HEIGHT):
@@ -924,7 +924,7 @@ def spiderpuffs(ctx,WIDTH,HEIGHT):
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
             ctx.set_source_rgb(1, 1, 1)
-            ctx.set_line_width(random.uniform(0,4))#joone paksus juhuarv
+            ctx.set_line_width(random.uniform(0,4*(x_telje_suhe+y_telje_suhe)/2))#joone paksus juhuarv
             ctx.stroke()    #kannab kanvasele
 
 def susser(ctx,WIDTH,HEIGHT):
@@ -936,7 +936,7 @@ def susser(ctx,WIDTH,HEIGHT):
         x4, y4, x5, y5 = random.randint(0,int(6000* x_telje_suhe)), random.randint(0,int(3000* y_telje_suhe)), random.randint(0,int(6000* x_telje_suhe)), random.randint(0,int(3000* y_telje_suhe))
         x6, y6 = random.randint(0,int(6000* x_telje_suhe)), random.randint(0,int(3000* y_telje_suhe))
         ctx.set_source_rgb(1, 1, 1)#joone värv
-        ctx.set_line_width(random.uniform(0,4)) #joone laius
+        ctx.set_line_width(random.uniform(0,4*(x_telje_suhe+y_telje_suhe)/2)) #joone laius
         ctx.move_to(x, y)
         for j in range(random.randint(0,int(50* x_telje_suhe/y_telje_suhe))):
             ctx.curve_to(x1, y1, x2, y2, x3, y3) #kaare koordinaadid
@@ -952,7 +952,7 @@ def sussernurgast(ctx,WIDTH,HEIGHT):
         x4, y4, x5, y5 = random.randint(0,int(6000* x_telje_suhe)), random.randint(0,int(3000* y_telje_suhe)), random.randint(0,int(6000* x_telje_suhe)), random.randint(0,int(3000* y_telje_suhe))
         x6, y6 = random.randint(0,int(6000* x_telje_suhe)), random.randint(0,int(3000* y_telje_suhe))
         ctx.set_source_rgb(1, 1, 1) #joone värv
-        ctx.set_line_width(random.uniform(0,5))#joone laius
+        ctx.set_line_width(random.uniform(0,5*(x_telje_suhe+y_telje_suhe)/2))#joone laius
         ctx.move_to(x, y)# nihe x,y koordinaatidesse
         for j in range(random.randint(0,10)):
             ctx.curve_to(x1, y1, x2, y2, x3, y3)#kaare koordinaadid
@@ -967,7 +967,7 @@ def magnetlained1(ctx,WIDTH,HEIGHT):
         r,t,u,i,o = random.randint(1,int(30* x_telje_suhe/y_telje_suhe)),random.randint(0,int(100* x_telje_suhe)),random.randint(0,int(100* y_telje_suhe)),random.randint(0,200),random.randint(0,100)#randomiseeritud koordinaatkogumi loomine 
         x = random.randint(0,5) #randomiseeritud koordinaatkogumi loomine 
         ctx.set_source_rgb(1, 1, 1)
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36)
         ctx.scale(0.3, r)#skaleerimine
@@ -984,7 +984,7 @@ def magnetlained2(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,random.uniform(0.01,0.7))
-        ctx.set_line_width(random.uniform(0,3)) #joone laius
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2)) #joone laius
         ctx.save() #salvestab punkti
         ctx.rotate(i*math.pi/36) 
         ctx.scale(0.3, r) #skaleerimine
@@ -999,7 +999,7 @@ def magnetlained3(ctx,WIDTH,HEIGHT):
     r,t,u,i = random.randint(1,int(30* x_telje_suhe)),random.randint(0,int(100* x_telje_suhe)),random.randint(0,int(100* y_telje_suhe)),random.randint(0,int(200* x_telje_suhe))#randomiseeritud koordinaatkogumi loomine 
     for i in range(random.randint(int(36* x_telje_suhe/y_telje_suhe),int(500* x_telje_suhe/y_telje_suhe))):
         ctx.set_source_rgb(1, 1, 1)
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()#salvestab punkti
         ctx.rotate(i*math.pi/36) # rotatsiooni määr
         ctx.scale(0.3, r)#skaleerimine
@@ -1018,7 +1018,7 @@ def kiired1(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,0.2)
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36) #rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
@@ -1036,7 +1036,7 @@ def kiired2(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,0.2)
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
@@ -1054,7 +1054,7 @@ def kiired3(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,0.2)
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, d)#skaleerimine
@@ -1072,7 +1072,7 @@ def kiired4(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,0.2)
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
@@ -1091,7 +1091,7 @@ def kiired5(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,random.uniform(0.01,0.7))
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, d)#skaleerimine
@@ -1111,7 +1111,7 @@ def kiired6(ctx,WIDTH,HEIGHT):
         line_color = random.choice(list_of_colors)#värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
         ctx.set_source_rgba(line_r, line_g, line_b,random.uniform(0.05,0.4))
-        ctx.set_line_width(random.uniform(0,3))
+        ctx.set_line_width(random.uniform(0,3*(x_telje_suhe+y_telje_suhe)/2))
         ctx.save()
         ctx.rotate(i*math.pi/36)# rotatsiooni määr
         ctx.scale(0.3, 1)#skaleerimine
