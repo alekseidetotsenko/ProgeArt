@@ -817,36 +817,73 @@ def joonedkeskelt(ctx,WIDTH,HEIGHT):
 def ringid_valged(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
-    for i in range(int(20* x_telje_suhe)):
-        r = int(10* x_telje_suhe) #algraadius
+    for i in range(int(20)):
+        r = int(10* (x_telje_suhe+y_telje_suhe)/2) #algraadius
         x = random.randint(1,int(3*1980* x_telje_suhe)) #juhuslikud alguspunktidele, korrutatud skaleerimisuhtega
         y = random.randint(1,int(3*1020* y_telje_suhe)) #juhuslikud alguspunktidele , korrutatud skaleerimisuhtega
-        for l in range(int(100* x_telje_suhe/y_telje_suhe)):
+        for l in range(int(100)):
             ctx.set_source_rgb(1, 1, 1)
             ctx.arc(x, y, r, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
-            ctx.set_line_width(2) #joone laius
+            ctx.set_line_width(4*(x_telje_suhe+y_telje_suhe)/2) #joone laius
             ctx.stroke()#kannab kanvasele
-            r += int(6* x_telje_suhe/y_telje_suhe)
-            x += random.randint(int(-50* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)) #juhuslikud nihe algpunktidele
-            y += random.randint(int(-50* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)) #juhuslikud nihe algpunktidele
+            r += int(6* (x_telje_suhe+y_telje_suhe)/2)
+            x += random.randint(int(-50* x_telje_suhe),int(50* x_telje_suhe)) #juhuslikud nihe algpunktidele
+            y += random.randint(int(-50* y_telje_suhe),int(50* y_telje_suhe)) #juhuslikud nihe algpunktidele
+            
             
 def ringid_värvilised(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
-    for i in range(int(20* x_telje_suhe)):
-        r = int(10* x_telje_suhe/y_telje_suhe) #algraadius
-        x = random.randint(1,int(HEIGHT)) #juhuslikud alguspunktidele
-        y = random.randint(1,int(WIDTH)) #juhuslikud alguspunktidele
-        for i in range(int(100* x_telje_suhe/y_telje_suhe)):
+    for i in range(int(20)):
+        r = int(10* (x_telje_suhe+y_telje_suhe)/2) #algraadius
+        x = random.randint(1,int(3*1980* x_telje_suhe)) #juhuslikud alguspunktidele, korrutatud skaleerimisuhtega
+        y = random.randint(1,int(3*1020* y_telje_suhe)) #juhuslikud alguspunktidele , korrutatud skaleerimisuhtega
+        for l in range(int(100)):
             line_color = random.choice(list_of_colors) #juhuvärvide kogust värvi määramine
             line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
             ctx.set_source_rgb(line_r, line_g, line_b)
             ctx.arc(x, y, r, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
-            ctx.set_line_width(2) #joone laius
+            ctx.set_line_width(4*(x_telje_suhe+y_telje_suhe)/2) #joone laius
             ctx.stroke()#kannab kanvasele
-            r += int(6* x_telje_suhe/y_telje_suhe) #raadiusemuut
-            x += random.randint(int(-50 * x_telje_suhe/y_telje_suhe),int(50 * x_telje_suhe/y_telje_suhe)) #juhuslikud nihe algpunktidele
-            y += random.randint(int(-50 * x_telje_suhe/y_telje_suhe),int(50 * x_telje_suhe/y_telje_suhe))  #juhuslikud nihe algpunktidele          
+            r += int(6* (x_telje_suhe+y_telje_suhe)/2) #raadiusemuut
+            x += random.randint(int(-50* x_telje_suhe),int(50* x_telje_suhe)) #juhuslikud nihe algpunktidele
+            y += random.randint(int(-50* y_telje_suhe),int(50* y_telje_suhe)) #juhuslikud nihe algpunktidele
+            
+            
+# vana versioon
+# # def ringid_valged(ctx,WIDTH,HEIGHT):
+# #     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
+# #     y_telje_suhe = HEIGHT / (3*1020)
+# #     for i in range(int(20* x_telje_suhe)):
+# #         r = int(10* x_telje_suhe) #algraadius
+# #         x = random.randint(1,int(3*1980* x_telje_suhe)) #juhuslikud alguspunktidele, korrutatud skaleerimisuhtega
+# #         y = random.randint(1,int(3*1020* y_telje_suhe)) #juhuslikud alguspunktidele , korrutatud skaleerimisuhtega
+# #         for l in range(int(100* x_telje_suhe/y_telje_suhe)):
+# #             ctx.set_source_rgb(1, 1, 1)
+# #             ctx.arc(x, y, r, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+# #             ctx.set_line_width(2) #joone laius
+# #             ctx.stroke()#kannab kanvasele
+# #             r += int(6* x_telje_suhe/y_telje_suhe)
+# #             x += random.randint(int(-50* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)) #juhuslikud nihe algpunktidele
+# #             y += random.randint(int(-50* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)) #juhuslikud nihe algpunktidele
+# #   vana versioon          
+# # def ringid_värvilised(ctx,WIDTH,HEIGHT):
+# #     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
+# #     y_telje_suhe = HEIGHT / (3*1020)
+# #     for i in range(int(20* x_telje_suhe)):
+# #         r = int(10* x_telje_suhe/y_telje_suhe) #algraadius
+# #         x = random.randint(1,int(HEIGHT)) #juhuslikud alguspunktidele
+# #         y = random.randint(1,int(WIDTH)) #juhuslikud alguspunktidele
+# #         for i in range(int(100* x_telje_suhe/y_telje_suhe)):
+# #             line_color = random.choice(list_of_colors) #juhuvärvide kogust värvi määramine
+# #             line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
+# #             ctx.set_source_rgb(line_r, line_g, line_b)
+# #             ctx.arc(x, y, r, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+# #             ctx.set_line_width(2) #joone laius
+# #             ctx.stroke()#kannab kanvasele
+# #             r += int(6* x_telje_suhe/y_telje_suhe) #raadiusemuut
+# #             x += random.randint(int(-50 * x_telje_suhe/y_telje_suhe),int(50 * x_telje_suhe/y_telje_suhe)) #juhuslikud nihe algpunktidele
+# #             y += random.randint(int(-50 * x_telje_suhe/y_telje_suhe),int(50 * x_telje_suhe/y_telje_suhe))  #juhuslikud nihe algpunktidele          
             
 def spiderpuff(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
