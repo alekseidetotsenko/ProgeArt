@@ -739,7 +739,7 @@ def hexagonid_värvilised(ctx,WIDTH,HEIGHT):
         algus_x = random.randint(int(-2000* x_telje_suhe), int(10000* x_telje_suhe)) #juhuslikud alguspunktidele
         algus_y = random.randint(int(-2000* y_telje_suhe), int(10000* y_telje_suhe)) #juhuslikud alguspunktidele
         suvaarv = random.randrange(0, 300, 5)
-        HEX_W, HEX_H = (suvaarv, suvaarv) #hexagoni suurus
+        HEX_W, HEX_H = (suvaarv*(x_telje_suhe+y_telje_suhe)/2, suvaarv*(x_telje_suhe+y_telje_suhe)/2) #hexagoni suurus
         ctx.move_to(algus_x, algus_y)#algkoha nihe
         line_color = random.choice(list_of_colors)#juhuvärvide kogust värvi määramine
         line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
@@ -765,7 +765,7 @@ def hexagonid_must_valge(ctx,WIDTH,HEIGHT):
         algus_x = random.randint(int(-2000* x_telje_suhe), int(10000* x_telje_suhe)) #juhuslikud alguspunktidele
         algus_y = random.randint(int(-2000* y_telje_suhe), int(10000* y_telje_suhe)) #juhuslikud alguspunktidele
         suvaarv = random.randrange(0, 300, 5)
-        HEX_W, HEX_H = (suvaarv, suvaarv) #hexagoni suurus
+        HEX_W, HEX_H = (suvaarv*(x_telje_suhe+y_telje_suhe)/2, suvaarv*(x_telje_suhe+y_telje_suhe)/2) #hexagoni suurus
         ctx.move_to(algus_x, algus_y) #algkoha nihe
         ctx.set_source_rgb(1, 1, 1)#Joone värv must
         ctx.set_line_width(2*(x_telje_suhe+y_telje_suhe)/2)#joone laius
