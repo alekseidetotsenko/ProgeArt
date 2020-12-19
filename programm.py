@@ -7,7 +7,7 @@ import lõuend as l# siin on programmi kunsti pool
 
 
 
-# funktsiooni sisse lugemine näidise nime põhjal ja käivitamine
+# nupu "loo disain" vajutamisel
 def loo_muster():
     kõrgus = kast_pildi_kõrgus.get()
     laius = kast_pildi_laius.get()
@@ -99,12 +99,14 @@ def näidise_valik(*args):
     # dropdown menüü valiku uuendus
     valik.set(valikud[pildi_nr])
 
+#Tausta värvi valimine ja värvi näitav nupp
 def vali_värv():
     global värv
-    värv = askcolor(title = "Tausta värv")
-
-    nupp_vali_värv = Button(raam, text= "      ", command = vali_värv, bg = värv[1], fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv, highlightthickness = 0)
-    nupp_vali_värv.grid(row=2, rowspan=1, column=3, columnspan=3, sticky= W)
+    
+    if valik_taust.get() == 1:
+        värv = askcolor(title = "Tausta värv")
+        nupp_vali_värv = Button(raam, text= "      ", command = vali_värv, bg = värv[1], fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv, highlightthickness = 0)
+        nupp_vali_värv.grid(row=2, column=3, sticky= W)
 
 # raam
 raam = Tk()
@@ -203,10 +205,10 @@ nupp_edasi.grid(row = edasi_nupu_rida, column = edasi_nupu_veerg, sticky = E)
 nupp_tagasi = Button(raam, text = "<<", command = lambda: tagasi(piir), bg = nupu_tausta_värv, fg = teksti_värv, bd = 1, activebackground = nupu_taust_vajutades, activeforeground = teksti_värv)
 nupp_tagasi.grid(row = tagasi_nupu_rida, column = tagasi_nupu_veerg, sticky = W)
 
-värv = (0,0,0)
+värv = ('kohahoidja', tausta_värv)
 #tausta värvi valiku nupp
 valik_taust = IntVar()
-kas_taust = Checkbutton(raam, text='Taust: ', variable = valik_taust, command=vali_värv, selectcolor = tausta_värv, highlightbackground = tausta_värv, activebackground = tausta_värv, activeforeground = teksti_värv, fg = teksti_värv, bg = tausta_värv)
+kas_taust = Checkbutton(raam, text='Taust: ', variable = valik_taust, command = vali_värv, selectcolor = tausta_värv, highlightbackground = tausta_värv, activebackground = tausta_värv, activeforeground = teksti_värv, fg = teksti_värv, bg = tausta_värv)
 kas_taust.grid(row = 2, column = 2, sticky = E)
 
 
@@ -228,7 +230,7 @@ silt_faili_nimi = Label(raam, text = 'Nimi:', bg = tausta_värv, fg = teksti_vä
 silt_faili_nimi.grid(row = nime_sildi_rida, column = nime_sildi_veerg, sticky = W)
 kast_faili_nimi = Entry(raam, bg = kasti_tausta_värv, fg = teksti_värv)
 kast_faili_nimi.grid(row = nime_kasti_rida, column = nime_kasti_veerg, columnspan = nime_kasti_ulatus, sticky = W)
-kast_faili_nimi.insert(0,'minu_fail_1')
+kast_faili_nimi.insert(0,'minu_fail')
 
 # laiuse ja kõrguse sisestamise osa
 silt_pildi_laius = Label(raam, text = 'Laius:', bg = tausta_värv, fg = teksti_värv)
