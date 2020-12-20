@@ -672,10 +672,10 @@ def tähed(ctx,WIDTH,HEIGHT):
         ctx.set_line_width(random.uniform(1*x_ja_y_telje_suhe,2*x_ja_y_telje_suhe)) #joone laius
         for i in range(b): #lisatsüklid täinedavate joonte tekitamiseks nö star effektiks, kus muutb joonte randomiseerimisulats
             ctx.line_to(algus_x,algus_y)
-            ctx.rel_line_to(random.randrange(-10,10),random.randrange(-10,10))
+            ctx.rel_line_to(random.randrange(int(-10*x_ja_y_telje_suhe),int(10*x_ja_y_telje_suhe)),random.randrange(int(-10*x_ja_y_telje_suhe),int(10*x_ja_y_telje_suhe)))
             for k in range(b):
                 ctx.line_to(algus_x,algus_y)
-                ctx.rel_line_to(random.randrange(-5,5),random.randrange(-5,5))
+                ctx.rel_line_to(random.randrange(int(-5*x_ja_y_telje_suhe),int(5*x_ja_y_telje_suhe)),random.randrange(int(-5*x_ja_y_telje_suhe),int(5*x_ja_y_telje_suhe)))
             ctx.stroke() #kannab kanvasele         
             
 def raadiolained(ctx,WIDTH,HEIGHT):
@@ -726,7 +726,7 @@ def paljujoonivasemal(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
     x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2      
-    a = int(1500 * x_ja_y_telje_suhe) #tsüklite arv
+    a = 1500#tsüklite arv
     for i in range(a):
         ctx.line_to(random.randrange(int(3000* x_telje_suhe)), random.randrange(int(3000* x_telje_suhe))) #põhijoone koordinaadid
         ctx.rel_line_to(random.randrange(int(1000* y_telje_suhe)), random.randrange(int(1000* y_telje_suhe))) #relatiivselt põhikoordinaatidele tekkiva joone koordinaadid
@@ -738,7 +738,7 @@ def hexagonid_värvilised(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
     x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2      
-    a = int(2000 * x_telje_suhe/y_telje_suhe) #juhuslik arv muutujatele,hiljem tsükliarvuna kasutuses
+    a = 2000 #juhuslik arv muutujatele,hiljem tsükliarvuna kasutuses
     for i in range(a):
         algus_x = random.randint(int(-2000* x_telje_suhe), int(10000* x_telje_suhe)) #juhuslikud alguspunktidele
         algus_y = random.randint(int(-2000* y_telje_suhe), int(10000* y_telje_suhe)) #juhuslikud alguspunktidele
@@ -765,7 +765,7 @@ def hexagonid_must_valge(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
     x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2      
-    a = int(2000 * x_telje_suhe/y_telje_suhe) #juhuslik arv muutujatele,hiljem tsükliarvuna kasutuses
+    a = 2000  #juhuslik arv muutujatele,hiljem tsükliarvuna kasutuses
     for i in range(a):
         algus_x = random.randint(int(-2000* x_telje_suhe), int(10000* x_telje_suhe)) #juhuslikud alguspunktidele
         algus_y = random.randint(int(-2000* y_telje_suhe), int(10000* y_telje_suhe)) #juhuslikud alguspunktidele
@@ -820,6 +820,7 @@ def joonedkeskelt(ctx,WIDTH,HEIGHT):
         ctx.set_source_rgb(line_r, line_g, line_b)
         ctx.set_line_width(6*x_ja_y_telje_suhe) #joone laius
         ctx.stroke()#kannab kanvasele
+        
 
 def ringid_valged(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
@@ -837,7 +838,6 @@ def ringid_valged(ctx,WIDTH,HEIGHT):
             r += int(6* x_ja_y_telje_suhe)
             x += random.randint(int(-50* x_telje_suhe),int(50* x_telje_suhe)) #juhuslikud nihe algpunktidele
             y += random.randint(int(-50* y_telje_suhe),int(50* y_telje_suhe)) #juhuslikud nihe algpunktidele
-            
             
 def ringid_värvilised(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
@@ -863,7 +863,7 @@ def spiderpuff(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
     x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2      
-    a = int(50* x_telje_suhe/y_telje_suhe) #põhimustri algjätekte random arv
+    a = 50 #põhimustri algjätekte random arv
     b = 5 #lisajätkete tsüklide arv
     for j in range(a):
         algus_x = WIDTH/2 #algus canvase keskelt
@@ -871,15 +871,15 @@ def spiderpuff(ctx,WIDTH,HEIGHT):
         ctx.move_to(algus_x, algus_y)#algkoordinaatidesse nihe
         for i in range(b):
             ctx.line_to(algus_x,algus_y) #joon algkoordinaatidesse ning edaspidi relatiivse koordinaadi järgi juhusliku arvu järgi
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
             ctx.set_source_rgb(1, 1, 1) #joone värv
             ctx.set_line_width(random.uniform(0,4*x_ja_y_telje_suhe))
             ctx.stroke() #kannab kanvasele 
@@ -888,17 +888,17 @@ def spiderpuffs(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
     x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2      
-    a = int(100* x_telje_suhe/y_telje_suhe)#põhimustri algjätekte random arv
-    b = int(50* x_telje_suhe/y_telje_suhe) #lisajätkete tsüklide arv
+    a = 100 #põhimustri algjätekte random arv
+    b = 50 #lisajätkete tsüklide arv
     for j in range(a):
         algus_x = random.randint(int(-2000* x_telje_suhe), int(10000* x_telje_suhe))
         algus_y = random.randint(int(-2000* y_telje_suhe), int(10000* y_telje_suhe))
         ctx.move_to(algus_x, algus_y)#algkoordinaatidesse nihe
         for i in range(b):
             ctx.line_to(algus_x,algus_y) #joon algkoordinaatidesse ning edaspidi relatiivse koordinaadi järgi juhusliku arvu järgi
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
-            ctx.rel_line_to(random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)),random.randrange(int(-200* x_telje_suhe/y_telje_suhe),int(200* x_telje_suhe/y_telje_suhe),int(50* x_telje_suhe/y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
+            ctx.rel_line_to(random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)),random.randrange(int(-200* x_ja_y_telje_suhe),int(200* x_ja_y_telje_suhe),int(50* x_ja_y_telje_suhe)))
             ctx.set_source_rgb(1, 1, 1)
             ctx.set_line_width(random.uniform(0,4*x_ja_y_telje_suhe))#joone paksus juhuarv
             ctx.stroke()    #kannab kanvasele
@@ -950,7 +950,7 @@ def magnetlained1(ctx,WIDTH,HEIGHT):
         ctx.save()
         ctx.rotate(i*math.pi/36)
         ctx.scale(0.3, r)#skaleerimine
-        ctx.arc(t, u, i, x, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.arc(t*x_ja_y_telje_suhe, u*x_ja_y_telje_suhe, i*x_ja_y_telje_suhe, x*x_ja_y_telje_suhe, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
         ctx.restore()
         ctx.stroke()#kannab kanvasele
 
@@ -968,7 +968,7 @@ def magnetlained2(ctx,WIDTH,HEIGHT):
         ctx.save() #salvestab punkti
         ctx.rotate(i*math.pi/36) 
         ctx.scale(0.3, r) #skaleerimine
-        ctx.arc(t, u, i, 0, 2*math.pi)  #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.arc(t*x_ja_y_telje_suhe, u*x_ja_y_telje_suhe, i*x_ja_y_telje_suhe, 0, 2*math.pi)  #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
         ctx.restore()#taastab punkti
         ctx.stroke()#kannab kanvasele
 
@@ -984,7 +984,7 @@ def magnetlained3(ctx,WIDTH,HEIGHT):
         ctx.save()#salvestab punkti
         ctx.rotate(i*math.pi/36) # rotatsiooni määr
         ctx.scale(0.3, r)#skaleerimine
-        ctx.arc(t, u, i, 0, 2*math.pi)  #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
+        ctx.arc(t*x_ja_y_telje_suhe, u*x_ja_y_telje_suhe, i*x_ja_y_telje_suhe, 0, 2*math.pi)  #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
         ctx.restore()#taastab punkti
         ctx.stroke()#kannab kanvasele
 
