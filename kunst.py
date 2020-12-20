@@ -117,7 +117,7 @@ def mäed(cr, laius, kõrgus):
     
     rgb = (random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1))
     
-    for i in range(0, kõrgus, round(kõrgus/15)):
+    for i in range(0, kõrgus, round(kõrgus/7)):
         os = OpenSimplex(random.randint(0, 2**20))
         if paigal == 0:#valib värvi kombinatsioonid et tekiks 
             r = rgb[0]
