@@ -825,38 +825,40 @@ def joonedkeskelt(ctx,WIDTH,HEIGHT):
 def ringid_valged(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
-    x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2      
-    for i in range(20):
-        r = int(10* x_ja_y_telje_suhe) #algraadius
-        x = random.randint(1,int(3*1980* x_telje_suhe)) #juhuslikud alguspunktidele, korrutatud skaleerimisuhtega
-        y = random.randint(1,int(3*1020* y_telje_suhe)) #juhuslikud alguspunktidele , korrutatud skaleerimisuhtega
-        for l in range(100):
+    x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2
+    a,b = random.randrange(14,22),random.randrange(50,100)#tsüklite arvude muutujad, a ringide arv, b on välisringide arv ja lõplik suurus
+    for i in range(a):
+        r = int(10*x_ja_y_telje_suhe) #algraadius
+        x = random.randint(1,int(3*1980* x_ja_y_telje_suhe)) #juhuslikud alguspunktidele, korrutatud skaleerimisuhtega
+        y = random.randint(1,int(3*1980* x_ja_y_telje_suhe)) #juhuslikud alguspunktidele , korrutatud skaleerimisuhtega
+        for l in range(b):
             ctx.set_source_rgb(1, 1, 1)
             ctx.arc(x, y, r, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
-            ctx.set_line_width(4*x_ja_y_telje_suhe) #joone laius
+            ctx.set_line_width(6*x_ja_y_telje_suhe) #joone laius
             ctx.stroke()#kannab kanvasele
-            r += int(6* x_ja_y_telje_suhe)
-            x += random.randint(int(-50* x_telje_suhe),int(50* x_telje_suhe)) #juhuslikud nihe algpunktidele
-            y += random.randint(int(-50* y_telje_suhe),int(50* y_telje_suhe)) #juhuslikud nihe algpunktidele
+            r += int(6*x_ja_y_telje_suhe)
+            x += random.randint(int(-35* x_telje_suhe),int(35* x_telje_suhe)) #juhuslikud nihe algpunktidele
+            y += random.randint(int(-35* y_telje_suhe),int(35* y_telje_suhe)) #juhuslikud nihe algpunktidele
             
 def ringid_värvilised(ctx,WIDTH,HEIGHT):
     x_telje_suhe = WIDTH / (3*1980)#skaleerimissuhe x ja y telje jaoks
     y_telje_suhe = HEIGHT / (3*1020)
-    x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2      
-    for i in range(20):
+    x_ja_y_telje_suhe = (x_telje_suhe+y_telje_suhe)/2
+    a,b = random.randrange(14,22),random.randrange(50,100)
+    line_color = random.choice(list_of_colors) #juhuvärvide kogust värvi määramine
+    line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
+    ctx.set_source_rgb(line_r, line_g, line_b)
+    for i in range(a):
         r = int(10* x_ja_y_telje_suhe) #algraadius
         x = random.randint(1,int(3*1980* x_telje_suhe)) #juhuslikud alguspunktidele, korrutatud skaleerimisuhtega
-        y = random.randint(1,int(3*1020* y_telje_suhe)) #juhuslikud alguspunktidele , korrutatud skaleerimisuhtega
-        for l in range(100):
-            line_color = random.choice(list_of_colors) #juhuvärvide kogust värvi määramine
-            line_r, line_g, line_b = line_color[0]/255.0, line_color[1]/255.0, line_color[2]/255.0
-            ctx.set_source_rgb(line_r, line_g, line_b)
+        y = random.randint(1,int(3*1980* y_telje_suhe)) #juhuslikud alguspunktidele , korrutatud skaleerimisuhtega
+        for l in range(b):
             ctx.arc(x, y, r, 0, 2*math.pi) #kaare koordinaadid(x,y koordinaat, raaidus, nurk 1 ja nurk 2)
-            ctx.set_line_width(4*x_ja_y_telje_suhe) #joone laius
+            ctx.set_line_width(6*x_ja_y_telje_suhe) #joone laius
             ctx.stroke()#kannab kanvasele
             r += int(6* x_ja_y_telje_suhe) #raadiusemuut
-            x += random.randint(int(-50* x_telje_suhe),int(50* x_telje_suhe)) #juhuslikud nihe algpunktidele
-            y += random.randint(int(-50* y_telje_suhe),int(50* y_telje_suhe)) #juhuslikud nihe algpunktidele
+            x += random.randint(int(-35* x_telje_suhe),int(35* x_telje_suhe)) #juhuslikud nihe algpunktidele
+            y += random.randint(int(-35* y_telje_suhe),int(35* y_telje_suhe)) #juhuslikud nihe algpunktidele
                 
             
 def spiderpuff(ctx,WIDTH,HEIGHT):
