@@ -1,6 +1,6 @@
 Generatiivset kunsti loov programm.
 
-Programmi saab käivitada faili programm.py käivitades, kus asub kasutajaliides, või exe failist, mis asub build kaustas.
+Programmi saab käivitada faili programm.py käivitades, kus asub kasutajaliides, või programm.exe failist, mis asub exe kaustas.
 Valmis pildid salvestatakse kausta "Valminud kunstiteosed".
 Kui programm ei reageeri siis seda selle pärast, et mõne pildi joonistamisega läheb natuke kauem aega.
 
