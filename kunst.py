@@ -501,8 +501,9 @@ def jooneline(c, laius, kõrgus):
         c.set_line_width(joone_laius)
         c.stroke()        
 
-def natuke_sassis(c, laius, kõrgus):
-    # abifunktsioon
+def trüffel(c, laius, kõrgus):
+    
+    # abifunktsioonid
     def hulknurk(nurgad, keskpunkt_x, keskpunkt_y, raadius):
         θ = (2*math.pi)/nurgad
         x = keskpunkt_x
@@ -513,23 +514,33 @@ def natuke_sassis(c, laius, kõrgus):
             nurga_y = y + raadius*math.sin(i*θ)
             kujund.append((nurga_x, nurga_y))
         return kujund
-    
+
+    def deform(kujund, muut):
+        for i in range(len(kujund)-1, 0, -1):
+            keskpunkti_x = (kujund[i][0] + kujund[i-1][0])/2
+            keskpunkti_y = (kujund[i][1] + kujund[i-1][1])/2
+            juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
+            kujund.insert(i, juhu_punkt)
+        keskpunkti_x = (kujund[0][0] + kujund[len(kujund)-1][0])/2
+        keskpunkti_y = (kujund[0][1] + kujund[len(kujund)-1][1])/2
+        juhu_punkt = (random.gauss(keskpunkti_x, muut), random.gauss(keskpunkti_y, muut))
+        kujund.insert(0, juhu_punkt)
+        return kujund
+
     # põhifunktsioon
-    for i in range(2, 30):
-        nurgad = random.randint(5,20)
-        raadius = i**2
-        kujund = hulknurk(nurgad, 0, 0, raadius//4)
-        pööre = random.uniform(0, 4)
-        c.save()
-        c.translate(random.gauss(laius//2, 10), random.gauss(kõrgus//2, 10))
-        c.rotate(math.pi*pööre)
-        for j in range(len(kujund)-1, 0, -1):
-            c.move_to(kujund[j][0], kujund[j][1])
-            c.line_to(kujund[j-1][0], kujund[j-1][1])
-        c.set_source_rgb(1, 1, 1)
-        c.set_line_width(1)
+    max_tsüklid = int(min(laius, kõrgus) / (min(laius, kõrgus) * 0.001307)) # pildi järgi suurusega 5940 x 3060
+    tsüklite_arv = random.randint(max_tsüklid // 10, max_tsüklid + 1)
+    for i in range(tsüklite_arv):
+        kujund = hulknurk(random.randint(5, 20), random.randint(0, laius), random.randint(0, kõrgus), random.randint(0, min(laius, kõrgus) // 2))
+        for j in range(5):
+            kujund = deform(kujund, max(laius, kõrgus) * 0.00084175) # et muut oleks nagu 5 pildil suurusega 5940
+        c.move_to(kujund[0][0], kujund[0][1]) # alguspunkt
+        for e in range(len(kujund)): # kujundi joonistamine
+            c.line_to(kujund[e][0], kujund[e][1])
+        c.set_source_rgb(1,1,1)
+        joone_laius = max(laius, kõrgus) * 0.0003367 # et joone laius oleks nagu 2 pildil suurusega 5940
+        c.set_line_width(joone_laius)
         c.stroke()
-        c.restore()
 
 def paberlennukid(c, laius, kõrgus):
     # abifunktsioon
